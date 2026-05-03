@@ -1,43 +1,35 @@
-import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
-import { getStudentByClerkId } from "@/sanity/lib/student/getStudentByClerkId";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { prisma } from "@/lib/prisma";
 
-interface AuthResult {
-  isAuthorized: boolean;
-  redirect?: string;
-  studentId?: string;
+/**
+ * Returns the current Clerk userId or null. Cheap — no DB roundtrip.
+ */
+export async function getCurrentUserId(): Promise<string | null> {
+  const { userId } = await auth();
+  return userId ?? null;
 }
 
-export async function checkCourseAccess(
-  clerkId: string | null,
-  courseId: string
-): Promise<AuthResult> {
-  if (!clerkId) {
-    return {
-      isAuthorized: false,
-      redirect: "/",
-    };
+/**
+ * Ensures a User row exists for the currently signed-in Clerk user and returns it.
+ * Throws if no one is signed in — callers should ensure auth before calling this.
+ */
+export async function getOrCreateUser() {
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error("getOrCreateUser called without a signed-in user");
   }
 
-  const student = await getStudentByClerkId(clerkId);
-  if (!student?.data?._id) {
-    return {
-      isAuthorized: false,
-      redirect: "/",
-    };
-  }
+  const existing = await prisma.user.findUnique({ where: { id: userId } });
+  if (existing) return existing;
 
-  const isEnrolled = await isEnrolledInCourse(clerkId, courseId);
-  const course = await getCourseById(courseId);
-  if (!isEnrolled) {
-    return {
-      isAuthorized: false,
-      redirect: `/courses/${course?.slug?.current}`,
-    };
-  }
-
-  return {
-    isAuthorized: true,
-    studentId: student.data._id,
-  };
+  const clerkUser = await currentUser();
+  return prisma.user.create({
+    data: {
+      id: userId,
+      email: clerkUser?.emailAddresses[0]?.emailAddress ?? null,
+      name:
+        [clerkUser?.firstName, clerkUser?.lastName].filter(Boolean).join(" ") ||
+        null,
+    },
+  });
 }

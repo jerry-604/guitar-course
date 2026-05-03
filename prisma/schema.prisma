@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String             @id // Clerk user id; we don't generate our own
+  email       String?
+  name        String?
+  createdAt   DateTime           @default(now())
+  completions LessonCompletion[]
+}
+
+model Module {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  order       Int
+  title       String
+  kind        ModuleKind
+  songTitle   String?
+  songArtist  String?
+  description String?
+  lessons     Lesson[]
+
+  @@index([order])
+}
+
+enum ModuleKind {
+  skill
+  song
+}
+
+model Lesson {
+  id            String             @id @default(cuid())
+  module        Module             @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId      String
+  slug          String
+  order         Int
+  title         String
+  description   String?
+  youtubeUrl    String
+  notesMarkdown String?
+  completions   LessonCompletion[]
+
+  @@unique([moduleId, slug])
+  @@index([moduleId, order])
+}
+
+model LessonCompletion {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId    String
+  completedAt DateTime @default(now())
+
+  @@unique([userId, lessonId])
+}
