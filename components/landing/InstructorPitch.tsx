@@ -28,7 +28,7 @@ export function InstructorPitch() {
             This is an <em className="text-foreground">accelerated path to
             playing your first country music song</em>. Skip the rabbit
             holes; play <em>The Cowboy Rides Away</em> by week two if you
-            put in 15 minutes a day.
+            put in 30 minutes a day.
           </p>
           <p>
             There are thousands of beginner guitar videos online. Most of
