@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useTransition, type FormEvent } from "react";
-import { upload } from "@vercel/blob/client";
 import { useRouter } from "next/navigation";
-import { Upload, Link as LinkIcon, Loader2, Check, AlertTriangle, Info } from "lucide-react";
+import { Upload, Link as LinkIcon, Loader2, Check, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Tab = "upload" | "link";
@@ -13,22 +12,17 @@ type Props = {
   blockingSongTitle: string;
 };
 
-// File upload uses Vercel Blob, which is currently suspended because the
-// course videos blew past the Hobby tier storage cap. Until that's
-// resolved (or the upload route is rewritten against R2), only the
-// paste-link tab is shown. Flip this to false to re-enable uploads.
-const UPLOAD_DISABLED = true;
-
 /**
  * Two-tab tape submission form embedded on the locked song view.
- * - Upload tab: client-side direct-to-Blob upload via signed URL
+ * - Upload tab: presigned-URL direct upload to Cloudflare R2 (no bytes
+ *   pass through Vercel)
  * - Link tab: paste a hosted URL (Drive / YouTube unlisted / Vimeo / Loom)
- * Either path POSTs to /api/submissions, which records the row and emails
- * Jerry.
+ * Either path POSTs to /api/submissions, which records the row and
+ * emails Jerry via Resend.
  */
 export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
   const router = useRouter();
-  const [tab, setTab] = useState<Tab>(UPLOAD_DISABLED ? "link" : "upload");
+  const [tab, setTab] = useState<Tab>("upload");
   const [link, setLink] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
@@ -71,21 +65,57 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
     setProgress(0);
 
     try {
-      // Upload directly to Vercel Blob with a signed URL from our API.
-      const blob = await upload(`tapes/${Date.now()}-${file.name}`, file, {
-        access: "public",
-        handleUploadUrl: "/api/submissions/upload",
-        contentType: file.type,
-        onUploadProgress: (e) => setProgress(Math.round(e.percentage)),
+      // Step 1: ask the API for a presigned PUT URL
+      const tokenResp = await fetch("/api/submissions/upload", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type,
+          size: file.size,
+        }),
+      });
+      if (!tokenResp.ok) {
+        const j = await tokenResp.json().catch(() => ({}));
+        throw new Error(j.error ?? `Couldn't get upload URL (${tokenResp.status})`);
+      }
+      const { uploadUrl, publicUrl } = (await tokenResp.json()) as {
+        uploadUrl: string;
+        publicUrl: string;
+      };
+
+      // Step 2: PUT the bytes directly to R2 — track progress via XHR
+      // (fetch can't report upload progress in browsers yet).
+      await new Promise<void>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", uploadUrl);
+        xhr.setRequestHeader("Content-Type", file.type);
+        xhr.upload.addEventListener("progress", (ev) => {
+          if (ev.lengthComputable) {
+            setProgress(Math.round((ev.loaded / ev.total) * 100));
+          }
+        });
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) resolve();
+          else
+            reject(
+              new Error(
+                `R2 upload failed (${xhr.status}) — usually a CORS or credentials issue. Tell Jerry.`,
+              ),
+            );
+        };
+        xhr.onerror = () =>
+          reject(new Error("Network error during upload to R2."));
+        xhr.send(file);
       });
 
-      // Record the submission row + email Jerry.
+      // Step 3: record the submission row + email Jerry
       const resp = await fetch("/api/submissions", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           moduleSlug,
-          videoUrl: blob.url,
+          videoUrl: publicUrl,
           source: "upload",
         }),
       });
@@ -103,33 +133,21 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
 
   return (
     <div className="border border-foreground/15 bg-card">
-      {/* Tabs (upload temporarily disabled while file storage migrates) */}
-      {!UPLOAD_DISABLED && (
-        <div className="flex border-b border-foreground/15">
-          <TabButton
-            active={tab === "upload"}
-            onClick={() => setTab("upload")}
-            icon={<Upload className="h-3.5 w-3.5" />}
-            label="Upload a video"
-          />
-          <TabButton
-            active={tab === "link"}
-            onClick={() => setTab("link")}
-            icon={<LinkIcon className="h-3.5 w-3.5" />}
-            label="Paste a link"
-          />
-        </div>
-      )}
-      {UPLOAD_DISABLED && (
-        <div className="border-b border-foreground/15 bg-foreground/[0.025] px-5 py-3 flex items-start gap-2.5 text-xs leading-relaxed text-foreground/65">
-          <Info className="h-3.5 w-3.5 shrink-0 mt-0.5" />
-          <span>
-            Direct file upload is migrating to a new storage provider. For
-            now, paste a link to your recording (Drive, YouTube unlisted,
-            Vimeo, Loom — anything Jerry can open).
-          </span>
-        </div>
-      )}
+      {/* Tabs */}
+      <div className="flex border-b border-foreground/15">
+        <TabButton
+          active={tab === "upload"}
+          onClick={() => setTab("upload")}
+          icon={<Upload className="h-3.5 w-3.5" />}
+          label="Upload a video"
+        />
+        <TabButton
+          active={tab === "link"}
+          onClick={() => setTab("link")}
+          icon={<LinkIcon className="h-3.5 w-3.5" />}
+          label="Paste a link"
+        />
+      </div>
 
       <div className="p-5 sm:p-6">
         {tab === "upload" ? (
@@ -164,7 +182,7 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
               submitting={submitting}
               disabled={!file}
               ctaIdle="Send tape for review"
-              ctaBusy="Sending…"
+              ctaBusy={progress > 0 && progress < 100 ? `Uploading ${progress}%` : "Sending…"}
             />
           </form>
         ) : (
