@@ -1,20 +1,20 @@
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { SmartVideo } from "@/components/SmartVideo";
+
+const BLOB = "https://mfewqehaa0bzdb25.public.blob.vercel-storage.com";
 
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden border-b border-border/60">
-      {/* Background motivation video — direct R2 first (fast), proxy
-          fallback if the network blocks r2.dev */}
-      <SmartVideo
-        src="motivation-1.mp4"
+      {/* Background motivation video — Vercel Blob, universally trusted cert */}
+      <video
+        src={`${BLOB}/motivation-1.mp4`}
         autoPlay
         muted
         loop
         playsInline
         preload="metadata"
-        ariaHidden
+        aria-hidden
         className="absolute inset-0 h-full w-full object-cover opacity-[0.55] dark:opacity-40"
       />
 
@@ -43,8 +43,8 @@ export function Hero() {
           <p className="font-body text-lg leading-relaxed text-foreground/80 max-w-xl">
             Seven lessons, three open chords, three transitions, and a song you
             can actually play all the way through. No ads, no autoplay
-            recommendations — just a curated track from a tutor who&apos;s
-            taught bass and piano for years.
+            recommendations. Just a curated track from a working bass
+            guitarist who&apos;s tutored beginners for years.
           </p>
 
           <div className="mt-2 flex flex-wrap items-center gap-x-8 gap-y-3">

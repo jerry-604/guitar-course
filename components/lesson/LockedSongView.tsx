@@ -69,7 +69,7 @@ export function LockedSongView({ lockedModule, blockingModule }: Props) {
             from start to finish and Jeremiah has reviewed your tape.
           </p>
           <p className="leading-relaxed text-foreground/65">
-            The grading workflow is still being built — for now, finish the
+            The grading workflow is still being built. For now, finish the
             tutorial first, then email Jeremiah a link to your recording.
             He&apos;ll mark it green-light and this section opens up.
           </p>

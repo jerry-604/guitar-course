@@ -1,4 +1,4 @@
-import { SmartVideo } from "@/components/SmartVideo";
+const BLOB = "https://mfewqehaa0bzdb25.public.blob.vercel-storage.com";
 
 /**
  * Inverted-color "this is where you're heading" centerpiece.
@@ -30,7 +30,7 @@ export function WatchThisFirst() {
           </h2>
           <p className="mt-6 max-w-xl text-xl leading-relaxed text-[#E9DEC9]/85">
             Two takes of <em className="text-[#E9DEC9]">Amarillo by Morning</em>.
-            Same song, two reels — your soundtrack for the next few weeks.
+            Same song, two reels. Your soundtrack for the next few weeks.
             That&apos;s where this course is taking you.
           </p>
         </div>
@@ -46,8 +46,8 @@ export function WatchThisFirst() {
                 className="absolute -inset-2 -z-10 bg-[#E9DEC9]/[0.06]"
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
-                <SmartVideo
-                  src="motivation-2.mp4"
+                <video
+                  src={`${BLOB}/motivation-2.mp4`}
                   autoPlay
                   muted
                   loop
@@ -72,8 +72,8 @@ export function WatchThisFirst() {
                 className="absolute -inset-2 -z-10 bg-[#E9DEC9]/[0.06]"
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
-                <SmartVideo
-                  src="motivation-1.mp4"
+                <video
+                  src={`${BLOB}/motivation-1.mp4`}
                   autoPlay
                   muted
                   loop
@@ -98,8 +98,8 @@ export function WatchThisFirst() {
                 start to finish, no rewinds.
               </p>
               <p className="text-base leading-relaxed text-[#E9DEC9]/70">
-                You&apos;ll learn one song first — <em>The Cowboy Rides Away</em> —
-                send a tape, get the green light, then this one unlocks.
+                You&apos;ll learn one song first: <em>The Cowboy Rides Away</em>.
+                Send a tape, get the green light, then this one unlocks.
               </p>
             </div>
           </div>

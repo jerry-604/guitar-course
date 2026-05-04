@@ -9,24 +9,24 @@ export function InstructorPitch() {
             <br />
             <span className="italic text-primary">Not assembled.</span>
           </h2>
-          <p className="caps mt-6">— Jeremiah</p>
+          <p className="caps mt-6">Signed, Jeremiah</p>
         </div>
 
         <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-foreground/85">
           <p>
-            Hi — I&apos;m Jeremiah. I&apos;m a professional bass guitarist.
-            Back in Nigeria, before I moved to the US, I played multiple
-            concerts and tutored bass and piano students one-on-one. So
-            when I say I picked the videos on this site, I mean I sat with
-            every one of them with the eye of somebody who&apos;s actually
-            put a chord under a beginner&apos;s fingers and watched them
-            get it.
+            Hi. I&apos;m Jeremiah, a professional bass guitarist. I&apos;ve
+            played jazz concerts at Swarthmore and gigs across NYC. Before
+            I moved to the US, I tutored bass and piano students one-on-one
+            back in Nigeria. So when I say I picked the videos on this
+            site, I mean I sat with every one of them with the eye of
+            somebody who&apos;s actually put a chord under a beginner&apos;s
+            fingers and watched them get it.
           </p>
           <p>
             There are thousands of beginner guitar videos online. Most of
             them assume you already know things you don&apos;t. The ones
-            here are the ones I&apos;d hand a student — clear, in the
-            right order, no surprise prerequisites buried halfway through,
+            here are the ones I&apos;d hand a student. Clear, in the right
+            order, no surprise prerequisites buried halfway through,
             nothing that wastes your first hour with a guitar in your hand.
           </p>
           <p>
@@ -48,10 +48,13 @@ export function InstructorPitch() {
           <div className="border-t border-border/60 pt-6 mt-8 space-y-2">
             <div className="caps">If you have any questions</div>
             <p className="text-base text-foreground/85">
-              Ask <strong className="font-display text-primary">Jeremiah AI</strong>
-              {" "}— the floating chat in the bottom-right corner — for instant
-              help during a lesson. For anything that needs a real human reply,
-              email me at{" "}
+              Ask{" "}
+              <strong className="font-display text-primary">
+                Jeremiah AI
+              </strong>{" "}
+              (the floating chat in the bottom-right corner) for instant
+              help during a lesson. For anything that needs a real human
+              reply, email me at{" "}
               <a
                 href="mailto:jeremiahomolewa.work@gmail.com"
                 className="font-display text-primary underline-offset-4 transition-colors hover:underline"

@@ -80,9 +80,7 @@ export default async function LessonPage({
         </div>
       </header>
 
-      {/* Video — framed like a print plate. SmartVideo (inside VideoPlayer)
-          tries direct R2 first and falls back to the /api/video proxy on
-          error or stall, so we never need to pre-rewrite here. */}
+      {/* Video plate. URL is a Vercel Blob URL; player uses native <video>. */}
       <div className="my-8 border border-foreground/15 bg-foreground/[0.03] p-2">
         <VideoPlayer url={lesson.youtubeUrl} />
       </div>

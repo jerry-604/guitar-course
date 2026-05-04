@@ -21,7 +21,7 @@ const WELCOME: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi — I'm Jeremiah AI, on hand any time you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
+    "Hi. I'm Jeremiah AI, on hand any time you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
 };
 
 export function JeremiahAI() {
@@ -97,7 +97,7 @@ export function JeremiahAI() {
               m.id === assistantMsg.id
                 ? {
                     ...m,
-                    content: `Sorry — couldn't reach the assistant (${res.status}). ${errBody.slice(0, 120)}`,
+                    content: `Sorry, couldn't reach the assistant (${res.status}). ${errBody.slice(0, 120)}`,
                   }
                 : m,
             ),

@@ -33,7 +33,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Guitar Course — Beginner to George Strait",
+  title: "Guitar Course · Beginner to George Strait",
   description:
     "A free, single-instructor curriculum that takes you from your first guitar lesson to playing a complete George Strait song.",
 };

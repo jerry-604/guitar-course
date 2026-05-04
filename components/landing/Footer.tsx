@@ -8,7 +8,7 @@ export function Footer() {
         </div>
         <p className="max-w-md text-sm text-foreground/65 leading-relaxed">
           Built as a small, free, single-curriculum site. Tutorials are the
-          property of their respective creators — used here in a non-commercial
+          property of their respective creators, used here in a non-commercial
           curated context. Reach out if you&apos;re a teacher featured and want
           your video swapped or removed.
         </p>

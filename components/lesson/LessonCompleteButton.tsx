@@ -46,7 +46,7 @@ export function LessonCompleteButton({ lessonId, isComplete }: Props) {
       ) : (
         <span className="grid h-3.5 w-3.5 place-items-center border border-current" />
       )}
-      {isComplete ? "Marked complete — undo" : "Mark this lesson complete"}
+      {isComplete ? "Completed. Tap to undo" : "Mark this lesson complete"}
     </button>
   );
 }
