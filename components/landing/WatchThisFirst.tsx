@@ -70,8 +70,7 @@ export function WatchThisFirst() {
               </p>
               <p className="text-xs leading-relaxed text-[#E9DEC9]/55">
                 I rendered these on my company&apos;s GPUs from Thaniel&apos;s
-                LinkedIn photo. Two takes, same person — the destination,
-                rendered.
+                LinkedIn photo. Two takes, same person.
               </p>
             </div>
           </div>
