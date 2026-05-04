@@ -1,40 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+/**
+ * Two-state toggle. Editorial style — no dropdown menu, no system option,
+ * just the binary the reader actually wants.
+ */
+export function DarkModeToggle({ className }: { className?: string }) {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-function DarkModeToggle() {
-  const { setTheme } = useTheme();
+  // next-themes hydrates client-side; render a stable button until then
+  // to avoid mismatch + layout shift.
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted ? theme === "dark" : false;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <button
+      type="button"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className={cn(
+        "grid h-8 w-8 place-items-center text-foreground/70 transition-colors hover:text-foreground",
+        className,
+      )}
+    >
+      {mounted &&
+        (isDark ? (
+          <Sun className="h-[1.05rem] w-[1.05rem]" strokeWidth={1.6} />
+        ) : (
+          <Moon className="h-[1.05rem] w-[1.05rem]" strokeWidth={1.6} />
+        ))}
+    </button>
   );
 }
 

@@ -32,10 +32,36 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const SITE_DESCRIPTION =
+  "A free, single-instructor curriculum that takes you from your first guitar lesson to playing a complete George Strait song. Three open chords, three transitions, one real song.";
+
 export const metadata: Metadata = {
-  title: "Guitar Course · Beginner to George Strait",
-  description:
-    "A free, single-instructor curriculum that takes you from your first guitar lesson to playing a complete George Strait song.",
+  title: {
+    default: "Guitar Course · Beginner to George Strait",
+    template: "%s · Guitar Course",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: "Guitar Course",
+  authors: [{ name: "Jeremiah Omolewa" }],
+  keywords: [
+    "guitar lessons",
+    "beginner guitar",
+    "country guitar",
+    "George Strait",
+    "free guitar course",
+    "open chords",
+  ],
+  openGraph: {
+    type: "website",
+    title: "Guitar Course · Beginner to George Strait",
+    description: SITE_DESCRIPTION,
+    siteName: "Guitar Course",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Guitar Course · Beginner to George Strait",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -68,8 +94,9 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
-            enableSystem={false}
+            enableSystem
             disableTransitionOnChange
+            storageKey="guitar-course-theme"
           >
             <Header />
             {children}

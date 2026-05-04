@@ -17,7 +17,7 @@ export async function Sidebar({ completedLessonIds, fraction }: Props) {
   const pct = Math.round(fraction * 100);
 
   return (
-    <aside className="w-72 shrink-0 border-r border-border/60 bg-card">
+    <aside className="w-72 max-w-full shrink-0 border-r border-border/60 bg-card">
       {/* Progress block — editorial counter style, not a SaaS progress bar. */}
       <div className="border-b border-border/60 px-5 py-5">
         <div className="caps mb-2">Your progress</div>

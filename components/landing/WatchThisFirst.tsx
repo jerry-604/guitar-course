@@ -18,17 +18,17 @@ export function WatchThisFirst() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_70%,rgba(228,138,79,0.12),transparent_55%)]"
       />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-28">
-        <div className="mb-12 max-w-3xl">
+      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24 md:py-28">
+        <div className="mb-10 max-w-3xl sm:mb-12">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/65">
             Before you start · watch this first
           </div>
-          <h2 className="mt-4 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] sm:text-6xl">
+          <h2 className="mt-4 font-display text-4xl font-medium leading-[1] tracking-[-0.02em] sm:text-5xl md:text-6xl">
             This is where you&apos;re
             <br />
             <span className="italic text-[#E48A4F]">heading.</span>
           </h2>
-          <p className="mt-6 max-w-xl text-xl leading-relaxed text-[#E9DEC9]/85">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#E9DEC9]/85 sm:mt-6 sm:text-xl">
             Two takes of <em className="text-[#E9DEC9]">Amarillo by Morning</em>.
             Same song, two reels. Your soundtrack for the next few weeks.
             That&apos;s where this course is taking you.
@@ -105,7 +105,7 @@ export function WatchThisFirst() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t border-[#E9DEC9]/15 pt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/55">
+        <div className="mt-12 flex flex-wrap items-baseline gap-x-6 gap-y-3 border-t border-[#E9DEC9]/15 pt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/55 sm:mt-14 sm:gap-x-8">
           <span>↓ Three chords below</span>
           <span>·</span>
           <span>Two songs</span>

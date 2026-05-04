@@ -24,6 +24,16 @@ const WELCOME: Message = {
     "Hi. I'm Jeremiah AI, on hand any time you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
 };
 
+// Quick-tap suggestions shown when there's only the welcome message.
+// Tapping one fills the input AND auto-sends.
+const SUGGESTIONS: string[] = [
+  "My chords aren't ringing clean",
+  "How do I switch from G to D faster?",
+  "How long should I practice each day?",
+  "I can't reach the C chord stretch",
+  "When can I move to the next song?",
+];
+
 export function JeremiahAI() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
@@ -217,7 +227,7 @@ export function JeremiahAI() {
             <div className="flex items-baseline justify-between gap-3">
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-background/60">
-                  24/7 Course Assistant
+                  24/7 Course Assistant · Saved on this device
                 </div>
                 <div className="font-display text-lg font-medium leading-tight">
                   Jeremiah AI
@@ -226,9 +236,10 @@ export function JeremiahAI() {
               <button
                 type="button"
                 onClick={reset}
+                title="Clears this device's saved transcript"
                 className="font-mono text-[10px] uppercase tracking-[0.18em] text-background/60 underline-offset-4 transition-colors hover:text-background hover:underline"
               >
-                New chat
+                Clear chat
               </button>
             </div>
           </div>
@@ -265,6 +276,27 @@ export function JeremiahAI() {
                   </span>
                 </div>
               )}
+
+            {/* Suggested first questions — only when transcript is fresh */}
+            {messages.length === 1 && !isStreaming && (
+              <div className="space-y-2 pt-2">
+                <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/45">
+                  Try asking
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => void send(s)}
+                      className="border border-foreground/15 bg-background/50 px-2.5 py-1.5 text-left font-body text-xs leading-snug text-foreground/80 transition-colors hover:border-primary hover:text-primary"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Composer */}

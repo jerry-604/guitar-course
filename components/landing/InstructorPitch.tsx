@@ -1,10 +1,10 @@
 export function InstructorPitch() {
   return (
     <section className="border-b border-border/60">
-      <div className="mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-12">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:gap-16 sm:px-6 sm:py-24 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="caps mb-4">Why this curriculum</div>
-          <h2 className="font-display text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl">
+          <h2 className="font-display text-3xl font-medium leading-[1.05] tracking-tight sm:text-4xl md:text-5xl">
             Curated.
             <br />
             <span className="italic text-primary">Not assembled.</span>
@@ -12,7 +12,7 @@ export function InstructorPitch() {
           <p className="caps mt-6">Signed, Jeremiah</p>
         </div>
 
-        <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-foreground/85">
+        <div className="md:col-span-7 space-y-5 text-base leading-relaxed text-foreground/85 sm:space-y-6 sm:text-lg">
           <p>
             Hi. I&apos;m Jeremiah, a professional bass guitarist. I&apos;ve
             played jazz concerts at Swarthmore and gigs across NYC. Before

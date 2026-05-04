@@ -28,11 +28,11 @@ export function Hero() {
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(var(--background)/0.6)_85%)]"
       />
 
-      <div className="relative mx-auto flex min-h-[78vh] max-w-6xl flex-col justify-end gap-10 px-6 pb-20 pt-32">
-        <div className="flex flex-col gap-6 max-w-3xl animate-fade-up">
+      <div className="relative mx-auto flex min-h-[68vh] max-w-6xl flex-col justify-end gap-8 px-5 pb-14 pt-24 sm:min-h-[78vh] sm:gap-10 sm:px-6 sm:pb-20 sm:pt-32">
+        <div className="flex flex-col gap-5 max-w-3xl animate-fade-up sm:gap-6">
           <div className="caps">A free guitar course · est. 2026</div>
 
-          <h1 className="font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.92] tracking-[-0.035em] text-foreground">
+          <h1 className="font-display text-[clamp(2.4rem,8.5vw,7rem)] font-medium leading-[0.95] tracking-[-0.035em] text-foreground">
             From your first chord
             <br />
             to your first
@@ -40,18 +40,18 @@ export function Hero() {
             song.
           </h1>
 
-          <p className="font-body text-lg leading-relaxed text-foreground/80 max-w-xl">
+          <p className="font-body text-base leading-relaxed text-foreground/80 max-w-xl sm:text-lg">
             Seven lessons, three open chords, three transitions, and a song you
             can actually play all the way through. No ads, no autoplay
             recommendations. Just a curated track from a working bass
             guitarist who&apos;s tutored beginners for years.
           </p>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-8">
             <SignedOut>
               <Link
                 href="/sign-up"
-                className="group inline-flex items-center gap-3 border border-foreground bg-foreground px-6 py-3 font-display text-base text-background transition-colors hover:bg-primary hover:border-primary"
+                className="group inline-flex items-center gap-3 border border-foreground bg-foreground px-5 py-2.5 font-display text-sm text-background transition-colors hover:bg-primary hover:border-primary sm:px-6 sm:py-3 sm:text-base"
               >
                 Start the course
                 <span className="transition-transform group-hover:translate-x-1">
@@ -68,7 +68,7 @@ export function Hero() {
             <SignedIn>
               <Link
                 href="/learn"
-                className="group inline-flex items-center gap-3 border border-foreground bg-foreground px-6 py-3 font-display text-base text-background transition-colors hover:bg-primary hover:border-primary"
+                className="group inline-flex items-center gap-3 border border-foreground bg-foreground px-5 py-2.5 font-display text-sm text-background transition-colors hover:bg-primary hover:border-primary sm:px-6 sm:py-3 sm:text-base"
               >
                 Continue learning
                 <span className="transition-transform group-hover:translate-x-1">
@@ -80,10 +80,10 @@ export function Hero() {
         </div>
 
         {/* Bottom-row metadata in editorial caps lockups */}
-        <div className="flex flex-wrap items-baseline gap-x-10 gap-y-3 border-t border-border/60 pt-6 text-foreground/85">
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 border-t border-border/60 pt-5 text-foreground/85 sm:gap-x-10 sm:pt-6">
           <Stat label="Lessons" value="9" />
           <Stat label="Songs" value="2" />
-          <Stat label="Chords to learn" value="C · G · D" />
+          <Stat label="Chords to learn" value="D · G · C" />
           <Stat label="Cost" value="Free, forever" />
         </div>
       </div>

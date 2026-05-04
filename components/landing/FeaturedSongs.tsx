@@ -11,11 +11,11 @@ export async function FeaturedSongs() {
 
   return (
     <section className="border-b border-border/60 bg-card">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="mb-14 flex items-end justify-between gap-8 flex-wrap">
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
+        <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:mb-14 sm:flex-row sm:items-end sm:gap-8">
           <div>
             <div className="caps mb-3">The destinations</div>
-            <h2 className="font-display text-4xl font-medium tracking-tight sm:text-5xl">
+            <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl md:text-5xl">
               Two songs you&apos;ll&nbsp;play.
             </h2>
           </div>
@@ -26,7 +26,7 @@ export async function FeaturedSongs() {
           </p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
           {songs.map((song, idx) => {
             const isLocked = idx > 0; // landing always shows Side A as available
             const cover = (

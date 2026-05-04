@@ -26,8 +26,8 @@ type Props = {
  */
 export function LockedSongView({ lockedModule, blockingModule }: Props) {
   return (
-    <article className="mx-auto max-w-3xl px-8 py-16">
-      <div className="mb-8">
+    <article className="mx-auto max-w-3xl px-5 py-10 sm:px-8 sm:py-16">
+      <div className="mb-6 sm:mb-8">
         <Link
           href="/learn"
           className="caps inline-flex items-center gap-2 hover:text-foreground"
@@ -37,8 +37,8 @@ export function LockedSongView({ lockedModule, blockingModule }: Props) {
         </Link>
       </div>
 
-      <div className="border border-primary/30 bg-primary/[0.04] p-8 md:p-12">
-        <div className="flex items-start gap-5">
+      <div className="border border-primary/30 bg-primary/[0.04] p-6 sm:p-8 md:p-12">
+        <div className="flex items-start gap-4 sm:gap-5">
           <div className="wax-seal shrink-0">
             <Lock className="h-4 w-4" />
           </div>
@@ -75,11 +75,11 @@ export function LockedSongView({ lockedModule, blockingModule }: Props) {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-primary/15 pt-6">
+        <div className="mt-8 flex flex-col items-stretch gap-4 border-t border-primary/15 pt-6 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-3">
           {blockingModule?.firstLessonSlug && (
             <Link
               href={`/learn/${blockingModule.slug}/${blockingModule.firstLessonSlug}`}
-              className="group inline-flex items-center gap-3 border border-foreground bg-foreground px-5 py-2.5 font-display text-sm text-background transition-colors hover:bg-primary hover:border-primary"
+              className="group inline-flex items-center justify-center gap-3 border border-foreground bg-foreground px-5 py-2.5 font-display text-sm text-background transition-colors hover:bg-primary hover:border-primary"
             >
               {blockingModule.songTitle
                 ? `Practice ${blockingModule.songTitle}`
@@ -91,7 +91,7 @@ export function LockedSongView({ lockedModule, blockingModule }: Props) {
           )}
           <a
             href="mailto:jeremiahomolewa.work@gmail.com?subject=Tape%20submission%20for%20The%20Cowboy%20Rides%20Away"
-            className="editorial-cta editorial-cta--primary group"
+            className="editorial-cta editorial-cta--primary group justify-center sm:justify-start"
           >
             <Mail className="h-4 w-4" />
             Email Jeremiah a tape link

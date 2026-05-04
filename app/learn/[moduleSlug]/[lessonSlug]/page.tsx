@@ -60,18 +60,18 @@ export default async function LessonPage({
   const lessonIdx = mod.lessons.findIndex((l) => l.slug === lessonSlug);
 
   return (
-    <article className="mx-auto max-w-3xl px-8 py-12">
-      <header className="mb-8 border-b border-border/60 pb-6">
+    <article className="mx-auto max-w-3xl px-5 py-8 sm:px-8 sm:py-12">
+      <header className="mb-6 border-b border-border/60 pb-5 sm:mb-8 sm:pb-6">
         <div className="caps mb-2">
           {mod.kind === "song" && mod.songArtist
             ? `${mod.songArtist} · ${mod.title}`
             : mod.title}
         </div>
-        <h1 className="font-display text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl">
+        <h1 className="font-display text-3xl font-medium leading-[1.05] tracking-tight sm:text-4xl md:text-5xl">
           {lesson.title}
         </h1>
         {lesson.description && (
-          <p className="mt-4 max-w-2xl text-lg italic leading-relaxed text-foreground/75">
+          <p className="mt-3 max-w-2xl text-base italic leading-relaxed text-foreground/75 sm:mt-4 sm:text-lg">
             {lesson.description}
           </p>
         )}
@@ -81,17 +81,17 @@ export default async function LessonPage({
       </header>
 
       {/* Video plate. URL is a Vercel Blob URL; player uses native <video>. */}
-      <div className="my-8 border border-foreground/15 bg-foreground/[0.03] p-2">
+      <div className="my-6 border border-foreground/15 bg-foreground/[0.03] p-1.5 sm:my-8 sm:p-2">
         <VideoPlayer url={lesson.youtubeUrl} />
       </div>
 
       {lesson.notesMarkdown && (
-        <div className="prose prose-stone max-w-none my-10 dark:prose-invert">
+        <div className="prose prose-stone max-w-none my-8 dark:prose-invert sm:my-10">
           <LessonNotes markdown={lesson.notesMarkdown} />
         </div>
       )}
 
-      <footer className="mt-12 flex flex-wrap items-center justify-between gap-6 border-t border-border/60 pt-8">
+      <footer className="mt-10 flex flex-col items-stretch gap-4 border-t border-border/60 pt-6 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pt-8">
         <LessonCompleteButton lessonId={lesson.id} isComplete={isComplete} />
         <NextLessonButton next={next} />
       </footer>
