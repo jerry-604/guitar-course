@@ -1,30 +1,53 @@
+import { SmartVideo } from "@/components/SmartVideo";
+
 /**
- * Inverted-color "this is where you're heading" centerpiece. Lives between
- * Hero and FeaturedSongs to give the page a visual beat — the cream-paper
- * editorial flow stops, a single dark frame holds the portrait motivation
- * video, the reader gets a moment of "oh, that could be me."
+ * Inverted-color "this is where you're heading" centerpiece.
+ * Two motivation reels — same song (Amarillo by Morning) shot two ways —
+ * frame the message: this is the future, not just an aspiration.
  */
 export function WatchThisFirst() {
   return (
     <section className="relative overflow-hidden border-b border-border/60 bg-[#181410] text-[#E9DEC9]">
-      {/* Subtle warm radial wash so the deep-coffee background doesn't read flat */}
+      {/* Subtle warm radial wash so the deep-coffee bg doesn't read flat */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(142,42,38,0.18),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(142,42,38,0.18),transparent_55%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_70%,rgba(228,138,79,0.12),transparent_55%)]"
       />
 
       <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-28">
-        <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
-          {/* Portrait video — framed like a movie poster */}
+        <div className="mb-12 max-w-3xl">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/65">
+            Before you start · watch this first
+          </div>
+          <h2 className="mt-4 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] sm:text-6xl">
+            This is where you&apos;re
+            <br />
+            <span className="italic text-[#E48A4F]">heading.</span>
+          </h2>
+          <p className="mt-6 max-w-xl text-xl leading-relaxed text-[#E9DEC9]/85">
+            Two takes of <em className="text-[#E9DEC9]">Amarillo by Morning</em>.
+            Same song, two reels — your soundtrack for the next few weeks.
+            That&apos;s where this course is taking you.
+          </p>
+        </div>
+
+        {/* Two-video centerpiece. Portrait left, horizontal right.
+            Stacks vertically on mobile. */}
+        <div className="grid items-stretch gap-8 md:grid-cols-12 md:gap-10">
+          {/* Portrait reel */}
           <div className="md:col-span-5">
             <div className="relative mx-auto w-full max-w-[22rem]">
               <div
                 aria-hidden
-                className="absolute -inset-3 -z-10 bg-[#E9DEC9]/[0.06]"
+                className="absolute -inset-2 -z-10 bg-[#E9DEC9]/[0.06]"
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
-                <video
-                  src="/api/video/motivation-2.mp4"
+                <SmartVideo
+                  src="motivation-2.mp4"
                   autoPlay
                   muted
                   loop
@@ -35,45 +58,59 @@ export function WatchThisFirst() {
                 />
               </div>
               <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[#E9DEC9]/55">
-                <span>Reel · 0:30</span>
+                <span>Reel 01 · Portrait</span>
                 <span>Tap to unmute</span>
               </div>
             </div>
           </div>
 
-          {/* Copy */}
-          <div className="md:col-span-7 space-y-7">
-            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/65">
-              Before you start · watch this first
+          {/* Horizontal reel */}
+          <div className="md:col-span-7">
+            <div className="relative">
+              <div
+                aria-hidden
+                className="absolute -inset-2 -z-10 bg-[#E9DEC9]/[0.06]"
+              />
+              <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
+                <SmartVideo
+                  src="motivation-1.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  className="aspect-video w-full bg-black"
+                />
+              </div>
+              <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[#E9DEC9]/55">
+                <span>Reel 02 · Cinematic</span>
+                <span>Tap to unmute</span>
+              </div>
             </div>
 
-            <h2 className="font-display text-5xl font-medium leading-[1.02] tracking-[-0.02em] sm:text-6xl">
-              This is
-              <br />
-              where you&apos;re
-              <br />
-              <span className="italic text-[#E48A4F]">heading.</span>
-            </h2>
-
-            <p className="max-w-xl text-xl leading-relaxed text-[#E9DEC9]/85">
-              A complete George Strait song. Three chords. One steady strum.
-              The cowboy rides away — and your hands are the ones playing it.
-            </p>
-
-            <p className="max-w-xl text-base leading-relaxed text-[#E9DEC9]/65">
-              Right now this might look impossible. That&apos;s the point.
-              Seven lessons from now this <em className="text-[#E9DEC9]/85">is</em> you,
-              start to finish, no rewinds.
-            </p>
-
-            <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3 pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/55">
-              <span>↓ Three chords below</span>
-              <span>·</span>
-              <span>One song</span>
-              <span>·</span>
-              <span>You</span>
+            {/* Bottom motivational copy block, anchored to right column on
+                desktop so the eye finishes at the bottom of the section. */}
+            <div className="mt-10 max-w-xl space-y-4 text-[#E9DEC9]/80">
+              <p className="text-base leading-relaxed">
+                Right now this might look impossible. That&apos;s the point.
+                Seven lessons from now this <em className="text-[#E9DEC9]">is</em> you,
+                start to finish, no rewinds.
+              </p>
+              <p className="text-base leading-relaxed text-[#E9DEC9]/70">
+                You&apos;ll learn one song first — <em>The Cowboy Rides Away</em> —
+                send a tape, get the green light, then this one unlocks.
+              </p>
             </div>
           </div>
+        </div>
+
+        <div className="mt-14 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t border-[#E9DEC9]/15 pt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E9DEC9]/55">
+          <span>↓ Three chords below</span>
+          <span>·</span>
+          <span>Two songs</span>
+          <span>·</span>
+          <span>One you</span>
         </div>
       </div>
     </section>

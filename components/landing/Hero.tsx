@@ -1,19 +1,20 @@
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SmartVideo } from "@/components/SmartVideo";
 
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden border-b border-border/60">
-      {/* Background motivation video — same-origin via edge proxy so it
-          works on networks that block r2.dev */}
-      <video
-        src="/api/video/motivation-1.mp4"
+      {/* Background motivation video — direct R2 first (fast), proxy
+          fallback if the network blocks r2.dev */}
+      <SmartVideo
+        src="motivation-1.mp4"
         autoPlay
         muted
         loop
         playsInline
         preload="metadata"
-        aria-hidden
+        ariaHidden
         className="absolute inset-0 h-full w-full object-cover opacity-[0.55] dark:opacity-40"
       />
 

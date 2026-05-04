@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/Header";
+import { JeremiahAI } from "@/components/jeremiah-ai/JeremiahAI";
 
 // Display: characterful contemporary serif
 const fraunces = Fraunces({
@@ -72,6 +73,7 @@ export default function RootLayout({
           >
             <Header />
             {children}
+            <JeremiahAI />
           </ThemeProvider>
         </ClerkProvider>
       </body>

@@ -132,14 +132,14 @@ const curriculum: ModuleSeed[] = [
     songTitle: "Amarillo by Morning",
     songArtist: "George Strait",
     description:
-      "Once you've got Cowboy Rides Away under your belt, this one's next. New chords, new transitions — tutorial coming soon.",
+      "Ready after grading. Send Jeremiah a tape of you playing The Cowboy Rides Away — once it gets the green light, the Amarillo by Morning chord breakdown unlocks here.",
     coverImageUrl: `${R2}/second-song-cover.png`,
     lessons: [
       {
-        slug: "coming-soon",
-        title: "Tutorial coming soon",
+        slug: "submit-your-tape",
+        title: "Submit your tape to unlock",
         description:
-          "We're recording the chord breakdown for this one. In the meantime, keep practicing The Cowboy Rides Away — it'll only make this song easier.",
+          "Record yourself playing The Cowboy Rides Away from start to finish, send it through, and once it's reviewed Amarillo by Morning's tutorial appears here.",
         videoUrl: `${R2}/motivation-2.mp4`,
       },
     ],
