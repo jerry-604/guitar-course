@@ -36,10 +36,8 @@ export function ChordTrio() {
               delay={120 * i}
               className="flex flex-col items-center"
             >
-              <div className="text-foreground">
-                <ChordDiagram shape={shape} size="lg" showFingerNumbers />
-              </div>
-              <div className="mt-2 caps text-foreground/65">
+              <ChordDiagram shape={shape} size="lg" showFingerNumbers />
+              <div className="caps mt-5 text-center text-foreground/65 sm:mt-6">
                 {labelFor(shape.name)}
               </div>
             </RevealOnScroll>
