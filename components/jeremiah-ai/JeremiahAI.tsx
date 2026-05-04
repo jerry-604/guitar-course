@@ -11,6 +11,7 @@ import { useAuth } from "@clerk/nextjs";
 import { MessageCircle, X, Loader2, Send } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ContactModal } from "@/components/contact/ContactModal";
 import { cn } from "@/lib/utils";
 
 type Message = {
@@ -411,8 +412,29 @@ export function JeremiahAI() {
               )}
             </button>
           </form>
-          <div className="border-t border-foreground/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/40">
-            AI-generated · email Jerry for human help
+          <div className="flex items-center gap-2 border-t border-foreground/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.16em]">
+            <span className="text-foreground/40">AI-generated</span>
+            <span className="text-foreground/40">·</span>
+            <ContactModal
+              defaultSubject={(() => {
+                // Pre-fill subject with the most recent user question
+                // (truncated) so a failed-AI handoff reads naturally.
+                const lastUser = [...messages]
+                  .reverse()
+                  .find((m) => m.role === "user");
+                if (!lastUser) return "Question for Jerry";
+                const trimmed = lastUser.content.slice(0, 60).trim();
+                return `Re: ${trimmed}${lastUser.content.length > 60 ? "…" : ""}`;
+              })()}
+              trigger={
+                <button
+                  type="button"
+                  className="font-mono uppercase tracking-[0.16em] text-foreground/55 underline-offset-4 transition-colors hover:text-primary hover:underline"
+                >
+                  Message Jerry for human help
+                </button>
+              }
+            />
           </div>
         </div>
       )}
