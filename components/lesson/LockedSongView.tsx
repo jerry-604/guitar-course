@@ -68,7 +68,7 @@ export function LockedSongView({
           <p className="text-lg leading-relaxed">
             This song unlocks once you&apos;ve sent in a tape of{" "}
             <em className="text-foreground">{blockingSongTitle}</em> and
-            Jeremiah has given it the green light.
+            Jerry has given it the green light.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ function SubmissionStatus({ submission }: { submission: NonNullable<Submission> 
         <div>
           <div className="caps text-foreground/85">Tape received</div>
           <p className="mt-1 text-sm leading-relaxed text-foreground/75">
-            Sent {timeAgo(submission.createdAt)}. Jeremiah usually reviews
+            Sent {timeAgo(submission.createdAt)}. Jerry usually reviews
             tapes within a couple of days. You&apos;ll get an email when this
             song unlocks.
           </p>

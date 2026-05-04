@@ -1,3 +1,5 @@
+import { ContactModal } from "@/components/contact/ContactModal";
+
 export function InstructorPitch() {
   return (
     <section className="border-b border-border/60">
@@ -9,18 +11,24 @@ export function InstructorPitch() {
             <br />
             <span className="italic text-primary">Not assembled.</span>
           </h2>
-          <p className="caps mt-6">Signed, Jeremiah</p>
+          <p className="caps mt-6">Signed, Jerry</p>
         </div>
 
         <div className="md:col-span-7 space-y-5 text-base leading-relaxed text-foreground/85 sm:space-y-6 sm:text-lg">
           <p>
-            Hi. I&apos;m Jeremiah, a professional bass guitarist. I&apos;ve
+            Hi. I&apos;m Jerry, a professional bass guitarist. I&apos;ve
             played jazz concerts at Swarthmore and gigs across NYC. Before
             I moved to the US, I tutored bass and piano students one-on-one
             back in Nigeria. So when I say I picked the videos on this
             site, I mean I sat with every one of them with the eye of
             somebody who&apos;s actually put a chord under a beginner&apos;s
             fingers and watched them get it.
+          </p>
+          <p>
+            This is an <em className="text-foreground">accelerated path to
+            playing your first country music song</em>. Skip the rabbit
+            holes; play <em>The Cowboy Rides Away</em> by week two if you
+            put in 15 minutes a day.
           </p>
           <p>
             There are thousands of beginner guitar videos online. Most of
@@ -45,24 +53,27 @@ export function InstructorPitch() {
             <li>Kevin Nickens</li>
           </ul>
 
-          <div className="border-t border-border/60 pt-6 mt-8 space-y-2">
+          <div className="border-t border-border/60 pt-6 mt-8 space-y-3">
             <div className="caps">If you have any questions</div>
             <p className="text-base text-foreground/85">
               Ask{" "}
               <strong className="font-display text-primary">
-                Jeremiah AI
+                Jerry AI
               </strong>{" "}
               (the floating chat in the bottom-right corner) for instant
               help during a lesson. For anything that needs a real human
-              reply, email me at{" "}
-              <a
-                href="mailto:jeremiahomolewa.work@gmail.com"
-                className="font-display text-primary underline-offset-4 transition-colors hover:underline"
-              >
-                jeremiahomolewa.work@gmail.com
-              </a>
-              .
+              reply, send me a note directly.
             </p>
+            <ContactModal
+              trigger={
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 border border-foreground bg-foreground px-4 py-2 font-display text-sm text-background transition-colors hover:bg-primary hover:border-primary mt-1"
+                >
+                  Message Jerry →
+                </button>
+              }
+            />
           </div>
 
           <p className="caps pt-4">

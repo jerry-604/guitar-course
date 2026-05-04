@@ -63,7 +63,7 @@ export function SongLockModal({
             <p className="leading-relaxed">
               This song opens after you&apos;ve worked through{" "}
               <em className="text-foreground">{blockingSongTitle}</em>,
-              recorded yourself playing it start to finish, and Jeremiah
+              recorded yourself playing it start to finish, and Jerry
               has reviewed your tape and given you the green light.
             </p>
           </div>
@@ -85,7 +85,7 @@ export function SongLockModal({
                 Paste a link
               </div>
               <p className="text-xs leading-relaxed text-foreground/65">
-                Drive · YouTube unlisted · Vimeo · Loom — anything Jeremiah
+                Drive · YouTube unlisted · Vimeo · Loom — anything Jerry
                 can open.
               </p>
             </div>

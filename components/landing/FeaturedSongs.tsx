@@ -21,7 +21,7 @@ export async function FeaturedSongs() {
           </div>
           <p className="max-w-md text-foreground/75 leading-relaxed">
             Both George Strait. Both 100% playable on a beginner&apos;s
-            three-chord toolkit. Side B opens after Jeremiah grades your tape
+            three-chord toolkit. Side B opens after Jerry grades your tape
             of Side A.
           </p>
         </div>

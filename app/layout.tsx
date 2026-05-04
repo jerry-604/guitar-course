@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: "Guitar Course",
-  authors: [{ name: "Jeremiah Omolewa" }],
+  authors: [{ name: "Jerry Omolewa" }],
   keywords: [
     "guitar lessons",
     "beginner guitar",

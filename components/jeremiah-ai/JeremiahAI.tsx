@@ -24,12 +24,13 @@ const WELCOME: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi. I'm Jeremiah AI, on hand any time you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
+    "Hi. I'm Jerry AI — Jerry's 24/7 stand-in for when you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
 };
 
 const SUGGESTIONS: string[] = [
   "My chords aren't ringing clean",
   "How do I switch from G to D faster?",
+  "My guitar sounds out of tune — how do I tune it?",
   "How long should I practice each day?",
   "I can't reach the C chord stretch",
   "When can I move to the next song?",
@@ -261,7 +262,7 @@ export function JeremiahAI() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close Jeremiah AI" : "Open Jeremiah AI"}
+        aria-label={open ? "Close Jerry AI" : "Open Jerry AI"}
         className={cn(
           "fixed bottom-5 right-5 z-50 flex h-14 items-center gap-2.5 border border-foreground bg-foreground px-4 font-display text-sm text-background shadow-lg transition-all hover:bg-primary hover:border-primary md:bottom-7 md:right-7",
           open && "scale-95 opacity-90",
@@ -273,7 +274,7 @@ export function JeremiahAI() {
           <MessageCircle className="h-4 w-4" strokeWidth={2} />
         )}
         <span className="font-mono text-[10px] uppercase tracking-[0.18em]">
-          {open ? "Close" : "Ask Jeremiah AI"}
+          {open ? "Close" : "Ask Jerry AI"}
         </span>
       </button>
 
@@ -288,7 +289,7 @@ export function JeremiahAI() {
                   24/7 Course Assistant
                 </div>
                 <div className="font-display text-lg font-medium leading-tight">
-                  Jeremiah AI
+                  Jerry AI
                 </div>
               </div>
               <button
@@ -318,7 +319,7 @@ export function JeremiahAI() {
               >
                 {m.role === "assistant" && (
                   <div className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-                    Jeremiah AI
+                    Jerry AI
                   </div>
                 )}
                 {m.role === "assistant" ? (
@@ -411,7 +412,7 @@ export function JeremiahAI() {
             </button>
           </form>
           <div className="border-t border-foreground/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/40">
-            AI-generated · email Jeremiah for human help
+            AI-generated · email Jerry for human help
           </div>
         </div>
       )}

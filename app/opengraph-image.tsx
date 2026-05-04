@@ -101,7 +101,7 @@ export default async function Image() {
           }}
         >
           <span>9 lessons · 2 songs · Free forever</span>
-          <span style={{ color: "#8E2A26", fontWeight: 700 }}>Signed, Jeremiah</span>
+          <span style={{ color: "#8E2A26", fontWeight: 700 }}>Signed, Jerry</span>
         </div>
       </div>
     ),

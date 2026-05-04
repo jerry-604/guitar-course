@@ -24,7 +24,7 @@ const UPLOAD_DISABLED = true;
  * - Upload tab: client-side direct-to-Blob upload via signed URL
  * - Link tab: paste a hosted URL (Drive / YouTube unlisted / Vimeo / Loom)
  * Either path POSTs to /api/submissions, which records the row and emails
- * Jeremiah.
+ * Jerry.
  */
 export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
   const router = useRouter();
@@ -79,7 +79,7 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
         onUploadProgress: (e) => setProgress(Math.round(e.percentage)),
       });
 
-      // Record the submission row + email Jeremiah.
+      // Record the submission row + email Jerry.
       const resp = await fetch("/api/submissions", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -126,7 +126,7 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
           <span>
             Direct file upload is migrating to a new storage provider. For
             now, paste a link to your recording (Drive, YouTube unlisted,
-            Vimeo, Loom — anything Jeremiah can open).
+            Vimeo, Loom — anything Jerry can open).
           </span>
         </div>
       )}
@@ -144,7 +144,7 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
                 className="block w-full font-body text-sm text-foreground file:mr-3 file:border file:border-foreground/30 file:bg-transparent file:px-3 file:py-1.5 file:font-display file:text-xs file:uppercase file:tracking-wider file:text-foreground hover:file:border-foreground"
               />
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/50">
-                MP4 / MOV / WEBM · up to 500&nbsp;MB · stays private to Jeremiah
+                MP4 / MOV / WEBM · up to 500&nbsp;MB · stays private to Jerry
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export function SubmissionForm({ moduleSlug, blockingSongTitle }: Props) {
               />
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/50">
                 Google Drive · YouTube unlisted · Vimeo · Loom · anything
-                Jeremiah can open
+                Jerry can open
               </p>
             </div>
 
