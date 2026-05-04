@@ -2,11 +2,11 @@
 
 import { useTransition } from "react";
 import { Check, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   completeLesson,
   uncompleteLesson,
 } from "@/app/actions/lessonCompletion";
+import { cn } from "@/lib/utils";
 
 type Props = {
   lessonId: string;
@@ -27,17 +27,26 @@ export function LessonCompleteButton({ lessonId, isComplete }: Props) {
   };
 
   return (
-    <Button
+    <button
       onClick={onClick}
       disabled={isPending}
-      variant={isComplete ? "outline" : "default"}
+      className={cn(
+        "group inline-flex items-center gap-3 border px-5 py-2.5 font-display text-sm transition-colors disabled:opacity-60",
+        isComplete
+          ? "border-foreground/30 text-foreground hover:border-foreground"
+          : "border-foreground bg-foreground text-background hover:bg-primary hover:border-primary",
+      )}
     >
       {isPending ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        <Loader2 className="h-3.5 w-3.5 animate-spin" />
       ) : isComplete ? (
-        <Check className="mr-2 h-4 w-4" />
-      ) : null}
-      {isComplete ? "Completed — undo" : "Mark as complete"}
-    </Button>
+        <span className="grid h-3.5 w-3.5 place-items-center border border-current">
+          <Check className="h-2.5 w-2.5" strokeWidth={3} />
+        </span>
+      ) : (
+        <span className="grid h-3.5 w-3.5 place-items-center border border-current" />
+      )}
+      {isComplete ? "Marked complete — undo" : "Mark this lesson complete"}
+    </button>
   );
 }

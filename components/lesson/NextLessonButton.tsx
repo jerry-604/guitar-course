@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 type Props = {
   next: { moduleSlug: string; lessonSlug: string } | null;
@@ -9,16 +7,16 @@ type Props = {
 export function NextLessonButton({ next }: Props) {
   if (!next) {
     return (
-      <Button disabled variant="ghost">
-        You&apos;ve reached the end 🎉
-      </Button>
+      <span className="caps">You&apos;ve reached the end</span>
     );
   }
   return (
-    <Button asChild variant="outline">
-      <Link href={`/learn/${next.moduleSlug}/${next.lessonSlug}`}>
-        Next lesson <ArrowRight className="ml-2 h-4 w-4" />
-      </Link>
-    </Button>
+    <Link
+      href={`/learn/${next.moduleSlug}/${next.lessonSlug}`}
+      className="editorial-cta editorial-cta--primary group"
+    >
+      Next lesson
+      <span className="transition-transform group-hover:translate-x-1">→</span>
+    </Link>
   );
 }

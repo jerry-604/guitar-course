@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CheckCircle2, Circle, Lock } from "lucide-react";
+import { Check, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -19,12 +19,14 @@ export function SidebarLessonRow({ href, title, isComplete, isLocked }: Props) {
   if (isLocked) {
     return (
       <div
-        className="flex items-center gap-2 rounded px-2 py-1 text-sm text-muted-foreground/60 cursor-not-allowed"
+        className="flex items-center gap-3 px-2 py-1.5 text-sm text-muted-foreground/60 cursor-not-allowed"
         aria-disabled="true"
         title="Complete the previous song to unlock"
       >
-        <Lock className="h-4 w-4 shrink-0" />
-        <span className="truncate">{title}</span>
+        <span className="grid h-4 w-4 place-items-center text-[10px]">
+          <Lock className="h-3 w-3" />
+        </span>
+        <span className="truncate font-body">{title}</span>
       </div>
     );
   }
@@ -33,18 +35,25 @@ export function SidebarLessonRow({ href, title, isComplete, isLocked }: Props) {
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-2 rounded px-2 py-1 text-sm",
+        "group flex items-center gap-3 px-2 py-1.5 text-sm transition-colors",
         isActive
-          ? "bg-accent text-accent-foreground"
-          : "hover:bg-accent/50 text-muted-foreground",
+          ? "bg-primary/8 text-foreground"
+          : "text-foreground/75 hover:text-foreground hover:bg-muted/30",
       )}
     >
-      {isComplete ? (
-        <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
-      ) : (
-        <Circle className="h-4 w-4 shrink-0" />
-      )}
-      <span className="truncate">{title}</span>
+      <span
+        className={cn(
+          "grid h-4 w-4 place-items-center border text-[10px]",
+          isComplete
+            ? "border-primary bg-primary text-primary-foreground"
+            : isActive
+            ? "border-foreground"
+            : "border-muted-foreground/40 group-hover:border-foreground/70",
+        )}
+      >
+        {isComplete && <Check className="h-3 w-3" strokeWidth={3} />}
+      </span>
+      <span className="truncate font-body">{title}</span>
     </Link>
   );
 }
