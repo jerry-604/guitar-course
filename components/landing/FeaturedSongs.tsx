@@ -115,11 +115,9 @@ export async function FeaturedSongs() {
                 {idx === 0 && (
                   <figure className="mt-5 border-l-2 border-primary/50 pl-4">
                     <blockquote className="text-sm italic leading-relaxed text-foreground/75">
-                      &ldquo;After sitting with a stack of George Strait
-                      songs, this is the cleanest entry — three open
-                      chords, steady tempo, predictable verse-chorus
-                      structure. The rest of his catalog gets more complex
-                      from here. The right one to start with.&rdquo;
+                      &ldquo;I listened to a bunch of George Strait songs.
+                      This one is the easiest to start with. The rest get
+                      harder pretty fast, so we start here.&rdquo;
                     </blockquote>
                     <figcaption className="caps mt-2 not-italic text-primary">
                       Jerry&apos;s pick · why this song first

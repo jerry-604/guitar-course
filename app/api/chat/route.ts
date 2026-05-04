@@ -29,11 +29,10 @@ The course curriculum, in order. Every lesson video has clickable chapter timest
    - C ↔ D — 1:57 (outro 5:26)
 
 4. Song 1 — "The Cowboy Rides Away" by George Strait (Dad Rock Dojo, easy strum).
-   WHY THIS SONG FIRST: Jerry sat with a stack of George Strait tracks
-   and chose this one because it's the cleanest entry — three open
-   chords (D/G/C, exactly what was just taught), steady tempo,
-   predictable verse-chorus structure. The rest of George Strait's
-   catalog gets more complex; this is the easiest on-ramp.
+   WHY THIS SONG FIRST: Jerry listened to a bunch of George Strait songs
+   and this one is the easiest to start with. The rest of George Strait's
+   songs get harder pretty fast. It also only uses D, G, and C, which
+   is exactly what students just learned.
    Chapters: 0:00 intro · 0:59 chords in the song · 3:37 chord changes
    to watch for · 4:03 chord progression · 7:19 song structure ·
    7:47 strumming pattern · 9:44 demonstration · 13:06 how to practice.
