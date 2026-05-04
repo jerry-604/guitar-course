@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/Header";
 import { JeremiahAI } from "@/components/jeremiah-ai/JeremiahAI";
+import { ReadingProgress } from "@/components/ui/ReadingProgress";
 
 // Display: characterful contemporary serif
 const fraunces = Fraunces({
@@ -114,6 +115,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="guitar-course-theme"
           >
+            <ReadingProgress />
             <Header />
             {children}
             <JeremiahAI />

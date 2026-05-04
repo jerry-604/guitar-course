@@ -15,7 +15,7 @@ export function InstructorPitch() {
         </div>
 
         <div className="md:col-span-7 space-y-5 text-base leading-relaxed text-foreground/85 sm:space-y-6 sm:text-lg">
-          <p>
+          <p className="drop-cap">
             Hi. I&apos;m Jerry, a professional bass guitarist. I&apos;ve
             played jazz concerts at Swarthmore and gigs across NYC. Before
             I moved to the US, I tutored bass and piano students one-on-one
