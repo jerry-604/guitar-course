@@ -7,6 +7,7 @@ import {
   lockedByModuleSlug,
 } from "@/lib/queries/curriculum";
 import { getOrCreateUser } from "@/lib/auth";
+import { toProxiedVideoUrl } from "@/lib/videoUrl";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { LessonNotes } from "@/components/lesson/LessonNotes";
 import { LessonCompleteButton } from "@/components/lesson/LessonCompleteButton";
@@ -63,9 +64,10 @@ export default async function LessonPage({
         </div>
       </header>
 
-      {/* Video — framed like a print plate */}
+      {/* Video — framed like a print plate. URL pre-rewritten on the server
+          so the client never sees the raw r2.dev hostname. */}
       <div className="my-8 border border-foreground/15 bg-foreground/[0.03] p-2">
-        <VideoPlayer url={lesson.youtubeUrl} />
+        <VideoPlayer url={toProxiedVideoUrl(lesson.youtubeUrl)} />
       </div>
 
       {lesson.notesMarkdown && (

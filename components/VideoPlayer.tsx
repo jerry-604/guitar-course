@@ -1,36 +1,22 @@
 "use client";
 
-import { useMemo } from "react";
-
-const R2_HOST = "pub-3410e1e40f1a47128a7371ab17d56ad3.r2.dev";
-
-/**
- * Rewrites a video URL so it streams through our same-origin proxy at /api/video.
- * Networks and corporate Wi-Fi sometimes block raw r2.dev domains; the proxy
- * sidesteps that by serving from the app's own host. Any non-R2 URL passes through.
- */
-function proxyIfR2(url: string): string {
-  try {
-    const u = new URL(url);
-    if (u.hostname === R2_HOST) {
-      return `/api/video${u.pathname}`;
-    }
-    return url;
-  } catch {
-    return url;
-  }
-}
+import { toProxiedVideoUrl } from "@/lib/videoUrl";
 
 interface VideoPlayerProps {
+  /**
+   * Either a raw R2 URL or an already-proxied path. We re-rewrite either
+   * way so the component is safe whether the parent server component
+   * pre-rewrote or not.
+   */
   url: string;
   poster?: string;
 }
 
 export const VideoPlayer = ({ url, poster }: VideoPlayerProps) => {
-  const src = useMemo(() => proxyIfR2(url), [url]);
+  const src = toProxiedVideoUrl(url);
 
   return (
-    <div className="relative aspect-video overflow-hidden rounded-lg bg-black">
+    <div className="relative aspect-video overflow-hidden rounded-sm bg-black">
       <video
         key={src}
         src={src}
