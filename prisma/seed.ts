@@ -72,6 +72,13 @@ const curriculum: ModuleSeed[] = [
         description:
           "Start here. JustinGuitar's super-easy D chord lesson — three fingers, top three strings, and you're already making music.",
         videoUrl: `${CDN}/Super%20Easy%20First%20Guitar%20Lesson%20-%20Guitar%20Lessons%20For%20Beginners%20-%20Stage%201%20-%20The%20D%20Chord%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Introduction" },
+          { time: 25, title: "Where your fingers go" },
+          { time: 150, title: "Make sure your D sounds good" },
+          { time: 205, title: "Common problems & fixes" },
+          { time: 353, title: "Thumb-placement trick" },
+        ],
       },
       {
         slug: "g-major",
@@ -79,6 +86,12 @@ const curriculum: ModuleSeed[] = [
         description:
           "Good Guitarist breaks down G — the workhorse chord of country music. After D, this one's a confidence boost.",
         videoUrl: `${CDN}/Learn%20the%20G%20Chord%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 40, title: "The G chord" },
+          { time: 104, title: "Chord clarity" },
+          { time: 182, title: "Outro" },
+        ],
       },
       {
         slug: "c-major",
@@ -86,6 +99,12 @@ const curriculum: ModuleSeed[] = [
         description:
           "Last and trickiest. JustinGuitar's classic walkthrough — finger placement matters more than speed. Take your time.",
         videoUrl: `${CDN}/C%20Chord%20-%20Guitar%20For%20Beginners%20-%20Stage%203%20Guitar%20Lesson%20-%20JustinGuitar%20%5BBC-132%5D%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 57, title: "Finger placement, frets & muting" },
+          { time: 166, title: "Strumming + tips + mistakes to avoid" },
+          { time: 235, title: "Outro" },
+        ],
       },
     ],
   },
@@ -103,6 +122,12 @@ const curriculum: ModuleSeed[] = [
         description:
           "Start here. D and G share anchor points and live next to each other in countless beginner songs. The most forgiving switch you can practice.",
         videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20G%20to%20D%20%20Easy%20Beginner%20Guitar%20Lessons%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 52, title: "Chord review" },
+          { time: 104, title: "Chord switching game" },
+          { time: 313, title: "Outro" },
+        ],
       },
       {
         slug: "g-to-c",
@@ -110,6 +135,12 @@ const curriculum: ModuleSeed[] = [
         description:
           "Step up. There's a shared note on the second string — once you find that anchor, this gets fast.",
         videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20C%20to%20G%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 52, title: "Chord review" },
+          { time: 120, title: "Chord switching game" },
+          { time: 329, title: "Outro" },
+        ],
       },
       {
         slug: "c-to-d",
@@ -117,6 +148,12 @@ const curriculum: ModuleSeed[] = [
         description:
           "Hardest of the three — your whole hand has to reshape and travel. Slow it down. Speed comes later.",
         videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20C%20to%20D%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 52, title: "Chord review" },
+          { time: 117, title: "Chord switching game" },
+          { time: 326, title: "Outro" },
+        ],
       },
     ],
   },
@@ -137,6 +174,16 @@ const curriculum: ModuleSeed[] = [
         description:
           "Dad Rock Dojo walks you through the entire song from intro to outro. Slow strumming, perfect for your first song.",
         videoUrl: `${CDN}/The%20Cowboy%20Rides%20Away%20Guitar%20Lesson%20%20Easy%20Strum%20Version%20-%20Dad%20Rock%20Dojo%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 0, title: "Intro" },
+          { time: 59, title: "Chords in the song" },
+          { time: 217, title: "Chord changes to watch for" },
+          { time: 243, title: "The chord progression" },
+          { time: 439, title: "Song structure" },
+          { time: 467, title: "Strumming pattern" },
+          { time: 584, title: "Demonstration — Jon plays it through" },
+          { time: 786, title: "How to practice this" },
+        ],
       },
     ],
   },
