@@ -43,8 +43,8 @@ export function Hero() {
           <p className="font-body text-base leading-relaxed text-foreground/80 max-w-xl sm:text-lg">
             Seven lessons, three open chords, three transitions, and a song you
             can actually play all the way through. No ads, no autoplay
-            recommendations. Just a curated track from a working bass
-            guitarist who&apos;s tutored beginners for years.
+            recommendations. Just a curated track from Jerry, a professional
+            bass guitarist who tutored bass and piano students in Nigeria.
           </p>
 
           <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-8">
