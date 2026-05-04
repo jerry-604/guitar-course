@@ -229,7 +229,7 @@ export function JeremiahAI() {
             <div className="flex items-baseline justify-between gap-3">
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-background/60">
-                  24/7 Course Assistant · Saved on this device
+                  24/7 Course Assistant
                 </div>
                 <div className="font-display text-lg font-medium leading-tight">
                   Jeremiah AI
