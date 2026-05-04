@@ -4,9 +4,10 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden border-b border-border/60">
-      {/* Background motivation video — direct R2 for low-latency playback */}
+      {/* Background motivation video — same-origin via edge proxy so it
+          works on networks that block r2.dev */}
       <video
-        src="https://pub-3410e1e40f1a47128a7371ab17d56ad3.r2.dev/motivation-1.mp4"
+        src="/api/video/motivation-1.mp4"
         autoPlay
         muted
         loop

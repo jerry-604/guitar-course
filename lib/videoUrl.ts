@@ -9,7 +9,10 @@
  * PROXY_R2_VIDEOS to true and the same-origin /api/video/[...path]
  * route handler will take over transparently.
  */
-const PROXY_R2_VIDEOS = false;
+// Default ON: school/corporate WiFi often does TLS inspection on r2.dev
+// which breaks cert validation. Edge-runtime proxy + edge cache keeps
+// latency low for everyone, including networks that don't need the proxy.
+const PROXY_R2_VIDEOS = true;
 const R2_HOST = "pub-3410e1e40f1a47128a7371ab17d56ad3.r2.dev";
 
 export function toProxiedVideoUrl(url: string): string {

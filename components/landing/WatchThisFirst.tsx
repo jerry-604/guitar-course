@@ -24,7 +24,7 @@ export function WatchThisFirst() {
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
                 <video
-                  src="https://pub-3410e1e40f1a47128a7371ab17d56ad3.r2.dev/motivation-2.mp4"
+                  src="/api/video/motivation-2.mp4"
                   autoPlay
                   muted
                   loop
