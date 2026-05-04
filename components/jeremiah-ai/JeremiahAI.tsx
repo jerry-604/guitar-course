@@ -8,6 +8,8 @@ import {
   type FormEvent,
 } from "react";
 import { MessageCircle, X, Loader2, Send } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 
 type Message = {
@@ -264,7 +266,29 @@ export function JeremiahAI() {
                     Jeremiah AI
                   </div>
                 )}
-                <div className="whitespace-pre-wrap">{m.content}</div>
+                {m.role === "assistant" ? (
+                  <div
+                    className={cn(
+                      "prose prose-sm prose-stone max-w-none dark:prose-invert",
+                      "prose-p:my-2 prose-p:leading-relaxed prose-p:text-foreground/90",
+                      "prose-headings:font-display prose-headings:tracking-tight prose-headings:text-foreground",
+                      "prose-strong:font-display prose-strong:font-semibold prose-strong:text-foreground",
+                      "prose-em:italic",
+                      "prose-a:text-primary prose-a:underline-offset-2 hover:prose-a:underline",
+                      "prose-code:bg-foreground/[0.08] prose-code:px-1 prose-code:py-0.5 prose-code:rounded-sm prose-code:text-[0.85em] prose-code:before:content-[''] prose-code:after:content-['']",
+                      "prose-pre:bg-foreground/[0.06] prose-pre:p-3 prose-pre:text-foreground prose-pre:my-3",
+                      "prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:text-foreground/90 prose-li:marker:text-primary",
+                      "prose-blockquote:border-l-primary prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-foreground/80",
+                      "prose-hr:my-4 prose-hr:border-foreground/15",
+                    )}
+                  >
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {m.content || " "}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  <div className="whitespace-pre-wrap">{m.content}</div>
+                )}
               </div>
             ))}
             {isStreaming &&
