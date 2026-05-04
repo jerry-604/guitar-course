@@ -9,10 +9,15 @@ import { SidebarLessonRow } from "./SidebarLessonRow";
 
 type Props = {
   completedLessonIds: Set<string>;
+  approvedSubmissionSlugs: Set<string>;
   fraction: number;
 };
 
-export async function Sidebar({ completedLessonIds, fraction }: Props) {
+export async function Sidebar({
+  completedLessonIds,
+  approvedSubmissionSlugs,
+  fraction,
+}: Props) {
   const curriculum = await getCurriculum();
   const pct = Math.round(fraction * 100);
 
@@ -42,7 +47,7 @@ export async function Sidebar({ completedLessonIds, fraction }: Props) {
             const lockedBy = lockedByModuleSlug(
               curriculum,
               mod.slug,
-              completedLessonIds,
+              approvedSubmissionSlugs,
             );
             const isLocked = lockedBy !== null;
             const number = String(idx + 1).padStart(2, "0");

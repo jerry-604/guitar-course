@@ -3,6 +3,8 @@ import {
   getCurriculum,
   getLessonByPath,
   getCompletedLessonIds,
+  getApprovedSubmissionModuleSlugs,
+  getLatestSubmission,
   pickNextLesson,
   lockedByModuleSlug,
 } from "@/lib/queries/curriculum";
@@ -29,13 +31,19 @@ export default async function LessonPage({
   if (!found) notFound();
   const { module: mod, lesson } = found;
 
-  const completed = await getCompletedLessonIds(user.id);
+  const [completed, approvedSlugs] = await Promise.all([
+    getCompletedLessonIds(user.id),
+    getApprovedSubmissionModuleSlugs(user.id),
+  ]);
 
   // Locked song module: render an in-place "this is gated" explanation
-  // instead of silently redirecting away — bouncing the URL was confusing.
-  const lockedBy = lockedByModuleSlug(curriculum, moduleSlug, completed);
+  // (with submission form) instead of silently redirecting away.
+  const lockedBy = lockedByModuleSlug(curriculum, moduleSlug, approvedSlugs);
   if (lockedBy) {
     const blockingModule = curriculum.find((m) => m.slug === lockedBy);
+    const latestSubmission = blockingModule
+      ? await getLatestSubmission(user.id, blockingModule.slug)
+      : null;
     return (
       <LockedSongView
         lockedModule={mod}
@@ -46,6 +54,16 @@ export default async function LessonPage({
                 title: blockingModule.title,
                 songTitle: blockingModule.songTitle,
                 firstLessonSlug: blockingModule.lessons[0]?.slug,
+              }
+            : null
+        }
+        blockingSubmission={
+          latestSubmission
+            ? {
+                id: latestSubmission.id,
+                status: latestSubmission.status,
+                feedback: latestSubmission.feedback,
+                createdAt: latestSubmission.createdAt,
               }
             : null
         }

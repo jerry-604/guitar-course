@@ -13,6 +13,7 @@ model User {
   name        String?
   createdAt   DateTime           @default(now())
   completions LessonCompletion[]
+  submissions Submission[]
 }
 
 model Module {
@@ -60,4 +61,31 @@ model LessonCompletion {
   completedAt DateTime @default(now())
 
   @@unique([userId, lessonId])
+}
+
+model Submission {
+  id          String           @id @default(cuid())
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  moduleSlug  String           // which song this tape is for
+  videoUrl    String           // Blob URL or external link
+  source      SubmissionSource
+  status      SubmissionStatus @default(pending)
+  feedback    String?          // Jeremiah's note on approval/rejection
+  createdAt   DateTime         @default(now())
+  reviewedAt  DateTime?
+
+  @@index([userId, moduleSlug])
+  @@index([status, createdAt])
+}
+
+enum SubmissionStatus {
+  pending
+  approved
+  rejected
+}
+
+enum SubmissionSource {
+  upload   // file uploaded to Vercel Blob
+  link     // external URL pasted by the student
 }

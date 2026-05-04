@@ -123,14 +123,18 @@ export function pickFirstIncompleteLesson(
 }
 
 /**
- * A song module is locked until every previous song module is fully complete.
- * Skill modules are never locked. Returns the slug of the song that must be
- * finished first, or null if unlocked.
+ * A song module is locked until every previous song module has an approved
+ * submission for the user. Skill modules are never locked. Returns the slug
+ * of the song that needs an approved tape, or null if unlocked.
+ *
+ * (Lesson completion is independently tracked for the sidebar checkmarks
+ *  and progress bar, but doesn't gate next-song unlock anymore — only an
+ *  approved tape does.)
  */
 export function lockedByModuleSlug(
   curriculum: CurriculumNode[],
   moduleSlug: string,
-  completedIds: Set<string>,
+  approvedSubmissionSlugs: Set<string>,
 ): string | null {
   const moduleIdx = curriculum.findIndex((m) => m.slug === moduleSlug);
   if (moduleIdx === -1) return null;
@@ -140,10 +144,32 @@ export function lockedByModuleSlug(
   for (let i = 0; i < moduleIdx; i++) {
     const prev = curriculum[i];
     if (prev.kind !== "song") continue;
-    const allDone = prev.lessons.every((l) => completedIds.has(l.id));
-    if (!allDone) return prev.slug;
+    if (!approvedSubmissionSlugs.has(prev.slug)) return prev.slug;
   }
   return null;
+}
+
+/**
+ * Returns the set of moduleSlugs the user has an approved submission for.
+ */
+export async function getApprovedSubmissionModuleSlugs(
+  userId: string,
+): Promise<Set<string>> {
+  const rows = await prisma.submission.findMany({
+    where: { userId, status: "approved" },
+    select: { moduleSlug: true },
+  });
+  return new Set(rows.map((r) => r.moduleSlug));
+}
+
+/**
+ * Returns the user's most recent submission for a given module, or null.
+ */
+export async function getLatestSubmission(userId: string, moduleSlug: string) {
+  return prisma.submission.findFirst({
+    where: { userId, moduleSlug },
+    orderBy: { createdAt: "desc" },
+  });
 }
 
 /**

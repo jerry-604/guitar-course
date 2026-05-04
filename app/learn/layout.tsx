@@ -4,6 +4,7 @@ import { MobileSidebarTrigger } from "@/components/curriculum/MobileSidebarTrigg
 import { getOrCreateUser } from "@/lib/auth";
 import {
   getCompletedLessonIds,
+  getApprovedSubmissionModuleSlugs,
   getOverallProgress,
 } from "@/lib/queries/curriculum";
 
@@ -15,13 +16,18 @@ export default async function LearnLayout({
   const user = await getOrCreateUser().catch(() => null);
   if (!user) redirect("/sign-in");
 
-  const [completed, progress] = await Promise.all([
+  const [completed, approvedSlugs, progress] = await Promise.all([
     getCompletedLessonIds(user.id),
+    getApprovedSubmissionModuleSlugs(user.id),
     getOverallProgress(user.id),
   ]);
 
   const sidebar = (
-    <Sidebar completedLessonIds={completed} fraction={progress.fraction} />
+    <Sidebar
+      completedLessonIds={completed}
+      approvedSubmissionSlugs={approvedSlugs}
+      fraction={progress.fraction}
+    />
   );
 
   return (
