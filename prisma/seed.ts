@@ -1,4 +1,4 @@
-import { PrismaClient, ModuleKind } from "@prisma/client";
+import { PrismaClient, ModuleKind, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -8,6 +8,8 @@ type LessonSeed = {
   description?: string;
   videoUrl: string;
   notesMarkdown?: string;
+  /** Optional clickable chapters under the video. */
+  chapters?: { time: number; title: string }[];
 };
 
 type ModuleSeed = {
@@ -43,6 +45,16 @@ const curriculum: ModuleSeed[] = [
         description:
           "Kevin Nickens walks you through everything a complete beginner needs to know to make their first chord ring out.",
         videoUrl: `${CDN}/Your%20First%20Guitar%20Lesson%20-%20Beginner%20Lesson%201%20-%20Kevin%20Nickens%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+        chapters: [
+          { time: 53, title: "Guitar parts" },
+          { time: 423, title: "How to hold the pick" },
+          { time: 439, title: "Strumming" },
+          { time: 500, title: "Picking" },
+          { time: 584, title: "Fretting" },
+          { time: 728, title: "Music theory basics" },
+          { time: 788, title: "E minor" },
+          { time: 834, title: "What's next" },
+        ],
       },
     ],
   },
@@ -217,6 +229,7 @@ async function main() {
           description: lesson.description,
           youtubeUrl: lesson.videoUrl,
           notesMarkdown: lesson.notesMarkdown,
+          chapters: lesson.chapters ?? Prisma.JsonNull,
         },
         update: {
           order: (index + 1) * 10,
@@ -224,6 +237,7 @@ async function main() {
           description: lesson.description,
           youtubeUrl: lesson.videoUrl,
           notesMarkdown: lesson.notesMarkdown,
+          chapters: lesson.chapters ?? Prisma.JsonNull,
         },
       });
     }

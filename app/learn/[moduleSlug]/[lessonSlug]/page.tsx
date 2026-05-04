@@ -9,7 +9,7 @@ import {
   lockedByModuleSlug,
 } from "@/lib/queries/curriculum";
 import { getOrCreateUser } from "@/lib/auth";
-import { VideoPlayer } from "@/components/VideoPlayer";
+import { VideoPlayer, type Chapter } from "@/components/VideoPlayer";
 import { LockedSongView } from "@/components/lesson/LockedSongView";
 import { LessonNotes } from "@/components/lesson/LessonNotes";
 import { LessonCompleteButton } from "@/components/lesson/LessonCompleteButton";
@@ -98,9 +98,13 @@ export default async function LessonPage({
         </div>
       </header>
 
-      {/* Video plate. URL is a Vercel Blob URL; player uses native <video>. */}
-      <div className="my-6 border border-foreground/15 bg-foreground/[0.03] p-1.5 sm:my-8 sm:p-2">
-        <VideoPlayer url={lesson.youtubeUrl} />
+      {/* Video plate. Chapters (if any) render as a clickable seek list
+          underneath the video frame. */}
+      <div className="my-6 sm:my-8">
+        <VideoPlayer
+          url={lesson.youtubeUrl}
+          chapters={(lesson.chapters as Chapter[] | null) ?? null}
+        />
       </div>
 
       {lesson.notesMarkdown && (

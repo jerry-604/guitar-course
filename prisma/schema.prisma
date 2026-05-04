@@ -47,6 +47,8 @@ model Lesson {
   description   String?
   youtubeUrl    String
   notesMarkdown String?
+  // chapters: array of `{ time: number /* seconds */; title: string }` rendered as clickable seek rows below the video.
+  chapters      Json?
   completions   LessonCompletion[]
 
   @@unique([moduleId, slug])
