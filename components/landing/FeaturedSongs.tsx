@@ -110,6 +110,22 @@ export async function FeaturedSongs() {
                     {song.description}
                   </p>
                 )}
+                {/* Curator's note explaining the song choice, only on
+                    Side A (the actually-playable starting song). */}
+                {idx === 0 && (
+                  <figure className="mt-5 border-l-2 border-primary/50 pl-4">
+                    <blockquote className="text-sm italic leading-relaxed text-foreground/75">
+                      &ldquo;After sitting with a stack of George Strait
+                      songs, this is the cleanest entry — three open
+                      chords, steady tempo, predictable verse-chorus
+                      structure. The rest of his catalog gets more complex
+                      from here. The right one to start with.&rdquo;
+                    </blockquote>
+                    <figcaption className="caps mt-2 not-italic text-primary">
+                      Jerry&apos;s pick · why this song first
+                    </figcaption>
+                  </figure>
+                )}
               </article>
             );
           })}
