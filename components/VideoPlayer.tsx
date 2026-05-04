@@ -80,6 +80,11 @@ export const VideoPlayer = ({ url, poster, chapters }: VideoPlayerProps) => {
         />
       </div>
 
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
+        Tip · use the ⚙ icon on the player to slow the video down for
+        practicing along, or speed it up for review.
+      </p>
+
       {chapters && chapters.length > 0 && (
         <div className="border border-foreground/15 bg-card">
           <div className="caps border-b border-foreground/15 px-4 py-3">
