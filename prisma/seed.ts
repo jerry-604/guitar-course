@@ -22,9 +22,11 @@ type ModuleSeed = {
   lessons: LessonSeed[];
 };
 
-// All assets live on Vercel Blob — same-origin-trusted CDN, no MITM
-// problems on networks that intercept r2.dev.
-const BLOB = "https://mfewqehaa0bzdb25.public.blob.vercel-storage.com";
+// All assets live on Cloudflare R2 served through a custom domain
+// (videos.thanielguitarlessons.com). Cert is Cloudflare's Universal SSL on
+// our own domain — no school-WiFi MITM, no Vercel Blob storage caps,
+// AND R2 doesn't bill egress so the bandwidth is effectively free.
+const CDN = "https://videos.thanielguitarlessons.com";
 
 const curriculum: ModuleSeed[] = [
   {
@@ -40,7 +42,7 @@ const curriculum: ModuleSeed[] = [
         title: "Your first guitar lesson",
         description:
           "Kevin Nickens walks you through everything a complete beginner needs to know to make their first chord ring out.",
-        videoUrl: `${BLOB}/lessons/your-first-lesson.mp4`,
+        videoUrl: `${CDN}/Your%20First%20Guitar%20Lesson%20-%20Beginner%20Lesson%201%20-%20Kevin%20Nickens%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
@@ -57,21 +59,21 @@ const curriculum: ModuleSeed[] = [
         title: "D major",
         description:
           "Start here. JustinGuitar's super-easy D chord lesson — three fingers, top three strings, and you're already making music.",
-        videoUrl: `${BLOB}/lessons/d-major.mp4`,
+        videoUrl: `${CDN}/Super%20Easy%20First%20Guitar%20Lesson%20-%20Guitar%20Lessons%20For%20Beginners%20-%20Stage%201%20-%20The%20D%20Chord%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "g-major",
         title: "G major",
         description:
           "Good Guitarist breaks down G — the workhorse chord of country music. After D, this one's a confidence boost.",
-        videoUrl: `${BLOB}/lessons/g-major.mp4`,
+        videoUrl: `${CDN}/Learn%20the%20G%20Chord%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "c-major",
         title: "C major",
         description:
           "Last and trickiest. JustinGuitar's classic walkthrough — finger placement matters more than speed. Take your time.",
-        videoUrl: `${BLOB}/lessons/c-major.mp4`,
+        videoUrl: `${CDN}/C%20Chord%20-%20Guitar%20For%20Beginners%20-%20Stage%203%20Guitar%20Lesson%20-%20JustinGuitar%20%5BBC-132%5D%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
@@ -88,21 +90,21 @@ const curriculum: ModuleSeed[] = [
         title: "D ↔ G transition",
         description:
           "Start here. D and G share anchor points and live next to each other in countless beginner songs. The most forgiving switch you can practice.",
-        videoUrl: `${BLOB}/lessons/transition-d-to-g.mp4`,
+        videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20G%20to%20D%20%20Easy%20Beginner%20Guitar%20Lessons%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "g-to-c",
         title: "G ↔ C transition",
         description:
           "Step up. There's a shared note on the second string — once you find that anchor, this gets fast.",
-        videoUrl: `${BLOB}/lessons/transition-g-to-c.mp4`,
+        videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20C%20to%20G%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "c-to-d",
         title: "C ↔ D transition",
         description:
           "Hardest of the three — your whole hand has to reshape and travel. Slow it down. Speed comes later.",
-        videoUrl: `${BLOB}/lessons/transition-c-to-d.mp4`,
+        videoUrl: `${CDN}/Chord%20Switching%20Practice%20-%20C%20to%20D%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
@@ -115,14 +117,14 @@ const curriculum: ModuleSeed[] = [
     songArtist: "George Strait",
     description:
       "Your first complete song. C, G, and D — exactly what you've been practicing. Dad Rock Dojo's easy-strum version.",
-    coverImageUrl: `${BLOB}/covers/cowboy-rides-away.png`,
+    coverImageUrl: `${CDN}/first-song-cover.png`,
     lessons: [
       {
         slug: "tutorial",
         title: "Full tutorial — easy strum version",
         description:
           "Dad Rock Dojo walks you through the entire song from intro to outro. Slow strumming, perfect for your first song.",
-        videoUrl: `${BLOB}/lessons/cowboy-rides-away.mp4`,
+        videoUrl: `${CDN}/The%20Cowboy%20Rides%20Away%20Guitar%20Lesson%20%20Easy%20Strum%20Version%20-%20Dad%20Rock%20Dojo%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
@@ -135,14 +137,14 @@ const curriculum: ModuleSeed[] = [
     songArtist: "George Strait",
     description:
       "Ready after grading. Send Jeremiah a tape of you playing The Cowboy Rides Away — once it gets the green light, the Amarillo by Morning chord breakdown unlocks here.",
-    coverImageUrl: `${BLOB}/covers/amarillo-by-morning.png`,
+    coverImageUrl: `${CDN}/second-song-cover.png`,
     lessons: [
       {
         slug: "submit-your-tape",
         title: "Submit your tape to unlock",
         description:
           "Record yourself playing The Cowboy Rides Away from start to finish, send it through, and once it's reviewed Amarillo by Morning's tutorial appears here.",
-        videoUrl: `${BLOB}/motivation-2.mp4`,
+        videoUrl: `${CDN}/motivation-2.mp4`,
       },
     ],
   },

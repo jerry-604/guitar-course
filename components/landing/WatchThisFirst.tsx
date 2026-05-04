@@ -1,4 +1,4 @@
-const BLOB = "https://mfewqehaa0bzdb25.public.blob.vercel-storage.com";
+const CDN = "https://videos.thanielguitarlessons.com";
 
 /**
  * Inverted-color "this is where you're heading" centerpiece.
@@ -47,7 +47,7 @@ export function WatchThisFirst() {
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
                 <video
-                  src={`${BLOB}/motivation-2.mp4`}
+                  src={`${CDN}/motivation-2.mp4`}
                   autoPlay
                   muted
                   loop
@@ -73,7 +73,7 @@ export function WatchThisFirst() {
               />
               <div className="border border-[#E9DEC9]/20 bg-black p-1.5 shadow-2xl">
                 <video
-                  src={`${BLOB}/motivation-1.mp4`}
+                  src={`${CDN}/motivation-1.mp4`}
                   autoPlay
                   muted
                   loop

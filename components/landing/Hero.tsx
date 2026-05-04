@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
-const BLOB = "https://mfewqehaa0bzdb25.public.blob.vercel-storage.com";
+const CDN = "https://videos.thanielguitarlessons.com";
 
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden border-b border-border/60">
-      {/* Background motivation video — Vercel Blob, universally trusted cert */}
+      {/* Background motivation video — Cloudflare R2 via custom domain */}
       <video
-        src={`${BLOB}/motivation-1.mp4`}
+        src={`${CDN}/motivation-1.mp4`}
         autoPlay
         muted
         loop
