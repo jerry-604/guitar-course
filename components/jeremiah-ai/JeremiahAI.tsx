@@ -7,6 +7,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
+import { useAuth } from "@clerk/nextjs";
 import { MessageCircle, X, Loader2, Send } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -26,8 +27,6 @@ const WELCOME: Message = {
     "Hi. I'm Jeremiah AI, on hand any time you get stuck on a chord, a strum pattern, or just want to know what to practice next. What's giving you trouble?",
 };
 
-// Quick-tap suggestions shown when there's only the welcome message.
-// Tapping one fills the input AND auto-sends.
 const SUGGESTIONS: string[] = [
   "My chords aren't ringing clean",
   "How do I switch from G to D faster?",
@@ -37,29 +36,66 @@ const SUGGESTIONS: string[] = [
 ];
 
 export function JeremiahAI() {
+  const { isSignedIn, isLoaded: authLoaded } = useAuth();
+
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
+  const [historyLoaded, setHistoryLoaded] = useState(false);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
-  // Load + persist transcript across page navigations
+  // Load history on first mount.
+  // - Signed in: GET /api/chat/history (Postgres). Cross-device.
+  // - Guest:     localStorage on this device only.
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as Message[];
-        if (Array.isArray(parsed) && parsed.length > 0) setMessages(parsed);
+    if (!authLoaded) return;
+    let cancelled = false;
+    (async () => {
+      if (isSignedIn) {
+        try {
+          const resp = await fetch("/api/chat/history", { cache: "no-store" });
+          if (resp.ok) {
+            const data = (await resp.json()) as { messages?: Message[] };
+            if (!cancelled && data.messages && data.messages.length > 0) {
+              setMessages(
+                data.messages.map((m) => ({
+                  id: m.id,
+                  role: m.role,
+                  content: m.content,
+                })),
+              );
+            }
+          }
+        } catch {
+          // fall back to localStorage if the API fails
+        }
+      } else {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw) as Message[];
+            if (!cancelled && Array.isArray(parsed) && parsed.length > 0) {
+              setMessages(parsed);
+            }
+          }
+        } catch {}
       }
-    } catch {}
-  }, []);
+      if (!cancelled) setHistoryLoaded(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [authLoaded, isSignedIn]);
 
+  // For guests, mirror messages to localStorage so they persist on this device.
   useEffect(() => {
+    if (!historyLoaded || isSignedIn) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
     } catch {}
-  }, [messages]);
+  }, [messages, historyLoaded, isSignedIn]);
 
   // Auto-scroll on new content
   useEffect(() => {
@@ -89,6 +125,8 @@ export function JeremiahAI() {
 
       const controller = new AbortController();
       abortRef.current = controller;
+
+      let accumulated = "";
 
       try {
         const res = await fetch("/api/chat", {
@@ -120,15 +158,12 @@ export function JeremiahAI() {
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
         let buffer = "";
-        let accumulated = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
           buffer += decoder.decode(value, { stream: true });
-
-          // SSE messages end with \n\n. Process complete frames; keep partial in buffer.
           const frames = buffer.split("\n\n");
           buffer = frames.pop() ?? "";
 
@@ -170,7 +205,7 @@ export function JeremiahAI() {
         }
       } catch (err) {
         if ((err as Error).name === "AbortError") {
-          // user closed/cancelled — leave the (possibly partial) message
+          // user closed/cancelled
         } else {
           setMessages((curr) =>
             curr.map((m) =>
@@ -183,9 +218,23 @@ export function JeremiahAI() {
       } finally {
         setIsStreaming(false);
         abortRef.current = null;
+
+        // Persist this turn server-side so signed-in users get their
+        // history on every device. Fire-and-forget; the API quietly
+        // no-ops for guests.
+        if (accumulated && isSignedIn) {
+          void fetch("/api/chat/persist", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              userMessage: trimmed,
+              assistantMessage: accumulated,
+            }),
+          });
+        }
       }
     },
-    [messages, isStreaming],
+    [messages, isStreaming, isSignedIn],
   );
 
   const onSubmit = (e: FormEvent) => {
@@ -193,11 +242,18 @@ export function JeremiahAI() {
     void send(input);
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
     abortRef.current?.abort();
     setMessages([WELCOME]);
     setInput("");
-  };
+    if (isSignedIn) {
+      void fetch("/api/chat/history", { method: "DELETE" });
+    } else {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {}
+    }
+  }, [isSignedIn]);
 
   return (
     <>
@@ -238,10 +294,9 @@ export function JeremiahAI() {
               <button
                 type="button"
                 onClick={reset}
-                title="Clears this device's saved transcript"
                 className="font-mono text-[10px] uppercase tracking-[0.18em] text-background/60 underline-offset-4 transition-colors hover:text-background hover:underline"
               >
-                Clear chat
+                New chat
               </button>
             </div>
           </div>
