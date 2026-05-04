@@ -18,6 +18,7 @@ export type CurriculumNode = {
   songTitle?: string | null;
   songArtist?: string | null;
   description?: string | null;
+  coverImageUrl?: string | null;
   lessons: LessonNode[];
 };
 
@@ -41,6 +42,7 @@ export async function getCurriculum(): Promise<CurriculumNode[]> {
     songTitle: m.songTitle,
     songArtist: m.songArtist,
     description: m.description,
+    coverImageUrl: m.coverImageUrl,
     lessons: m.lessons.map((l) => ({
       id: l.id,
       slug: l.slug,
@@ -116,6 +118,30 @@ export function pickFirstIncompleteLesson(
         return { moduleSlug: mod.slug, lessonSlug: lesson.slug };
       }
     }
+  }
+  return null;
+}
+
+/**
+ * A song module is locked until every previous song module is fully complete.
+ * Skill modules are never locked. Returns the slug of the song that must be
+ * finished first, or null if unlocked.
+ */
+export function lockedByModuleSlug(
+  curriculum: CurriculumNode[],
+  moduleSlug: string,
+  completedIds: Set<string>,
+): string | null {
+  const moduleIdx = curriculum.findIndex((m) => m.slug === moduleSlug);
+  if (moduleIdx === -1) return null;
+  const mod = curriculum[moduleIdx];
+  if (mod.kind !== "song") return null;
+
+  for (let i = 0; i < moduleIdx; i++) {
+    const prev = curriculum[i];
+    if (prev.kind !== "song") continue;
+    const allDone = prev.lessons.every((l) => completedIds.has(l.id));
+    if (!allDone) return prev.slug;
   }
   return null;
 }

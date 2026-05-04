@@ -1,9 +1,10 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getCurriculum,
   getLessonByPath,
   getCompletedLessonIds,
   pickNextLesson,
+  lockedByModuleSlug,
 } from "@/lib/queries/curriculum";
 import { getOrCreateUser } from "@/lib/auth";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -28,6 +29,13 @@ export default async function LessonPage({
   const { module: mod, lesson } = found;
 
   const completed = await getCompletedLessonIds(user.id);
+
+  // Hard-block access to lessons inside a locked song module.
+  const lockedBy = lockedByModuleSlug(curriculum, moduleSlug, completed);
+  if (lockedBy) {
+    redirect(`/learn`); // /learn redirector picks the next legit lesson
+  }
+
   const isComplete = completed.has(lesson.id);
   const next = pickNextLesson(curriculum, moduleSlug, lessonSlug);
 
