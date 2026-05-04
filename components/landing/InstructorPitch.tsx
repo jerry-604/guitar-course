@@ -14,9 +14,9 @@ export function InstructorPitch() {
         <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-foreground/85">
           <p>
             Every lesson here was watched, vetted, and ordered by someone who
-            used to teach bass and piano for a living. There are thousands of
-            beginner guitar videos online. Most of them assume you already
-            know things you don&apos;t.
+            taught bass and piano on the side because he loved it. There are
+            thousands of beginner guitar videos online. Most of them assume
+            you already know things you don&apos;t.
           </p>
           <p>
             This is the path I wish someone had handed me — three open chords,
@@ -33,7 +33,22 @@ export function InstructorPitch() {
             <li>Dad Rock Dojo</li>
             <li>Kevin Nickens</li>
           </ul>
-          <p className="caps pt-2">
+
+          <div className="border-t border-border/60 pt-6 mt-8 space-y-2">
+            <div className="caps">Get in touch</div>
+            <p className="text-base text-foreground/85">
+              Questions, feedback, or stuck on a chord? Email&nbsp;
+              <a
+                href="mailto:jeremiahomolewa.work@gmail.com"
+                className="font-display text-primary underline-offset-4 transition-colors hover:underline"
+              >
+                jeremiahomolewa.work@gmail.com
+              </a>
+              .
+            </p>
+          </div>
+
+          <p className="caps pt-4">
             All vetted · downloaded · ad-free
           </p>
         </div>

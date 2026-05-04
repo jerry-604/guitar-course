@@ -47,7 +47,23 @@ export default function RootLayout({
       className={`${fraunces.variable} ${newsreader.variable} ${plexMono.variable}`}
     >
       <body className="font-body antialiased">
-        <ClerkProvider>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              // Hide Clerk branding in our UI — keeps the editorial aesthetic
+              // intact. The dev-instance "Development mode" pill is a Clerk
+              // platform fixture; CSS in globals.css handles what's reachable.
+              footer: { display: "none" },
+              footerAction: { display: "none" },
+              userButtonPopoverFooter: { display: "none" },
+              logoBox: { display: "none" },
+            },
+            layout: {
+              socialButtonsPlacement: "bottom",
+              showOptionalFields: false,
+            },
+          }}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
