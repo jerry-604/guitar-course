@@ -1,4 +1,5 @@
 import { Hero } from "@/components/landing/Hero";
+import { WatchThisFirst } from "@/components/landing/WatchThisFirst";
 import { FeaturedSongs } from "@/components/landing/FeaturedSongs";
 import { CurriculumPreview } from "@/components/curriculum/CurriculumPreview";
 import { InstructorPitch } from "@/components/landing/InstructorPitch";
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <WatchThisFirst />
       <FeaturedSongs />
       <CurriculumPreview />
       <InstructorPitch />

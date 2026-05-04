@@ -46,30 +46,30 @@ const curriculum: ModuleSeed[] = [
     slug: "open-chords",
     order: 20,
     kind: ModuleKind.skill,
-    title: "Open chords — C, G, D",
+    title: "Open chords — D, G, C",
     description:
-      "Three open chords. Once these are clean, you can play thousands of songs — including every song in this course.",
+      "Three open chords in the order that makes them easiest to learn: start with D (only three fingers, top three strings), graduate to G (your country workhorse), finish with C (the long stretch).",
     lessons: [
       {
-        slug: "c-major",
-        title: "C major",
+        slug: "d-major",
+        title: "D major",
         description:
-          "JustinGuitar's classic walkthrough of the C chord. Take it slow — finger placement matters more than speed.",
-        videoUrl: `${R2}/C%20Chord%20-%20Guitar%20For%20Beginners%20-%20Stage%203%20Guitar%20Lesson%20-%20JustinGuitar%20%5BBC-132%5D%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
+          "Start here. JustinGuitar's super-easy D chord lesson — three fingers, top three strings, and you're already making music.",
+        videoUrl: `${R2}/Super%20Easy%20First%20Guitar%20Lesson%20-%20Guitar%20Lessons%20For%20Beginners%20-%20Stage%201%20-%20The%20D%20Chord%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "g-major",
         title: "G major",
         description:
-          "Good Guitarist breaks down G — the workhorse chord of country music.",
+          "Good Guitarist breaks down G — the workhorse chord of country music. After D, this one's a confidence boost.",
         videoUrl: `${R2}/Learn%20the%20G%20Chord%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
-        slug: "d-major",
-        title: "D major",
+        slug: "c-major",
+        title: "C major",
         description:
-          "JustinGuitar's super-easy D chord lesson. The third piece of your three-chord toolkit.",
-        videoUrl: `${R2}/Super%20Easy%20First%20Guitar%20Lesson%20-%20Guitar%20Lessons%20For%20Beginners%20-%20Stage%201%20-%20The%20D%20Chord%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
+          "Last and trickiest. JustinGuitar's classic walkthrough — finger placement matters more than speed. Take your time.",
+        videoUrl: `${R2}/C%20Chord%20-%20Guitar%20For%20Beginners%20-%20Stage%203%20Guitar%20Lesson%20-%20JustinGuitar%20%5BBC-132%5D%20-%20JustinGuitar%20%28720p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
@@ -79,25 +79,28 @@ const curriculum: ModuleSeed[] = [
     kind: ModuleKind.skill,
     title: "Chord transitions",
     description:
-      "Knowing the shapes isn't enough — you need to switch between them in time. These three drills get you there.",
+      "Knowing the shapes isn't enough — you need to switch between them in time. Ordered easy-to-hard so each drill builds on the last.",
     lessons: [
       {
-        slug: "c-to-g",
-        title: "C ↔ G transition",
-        description: "The most common pair in country music. Drill this until it's automatic.",
+        slug: "d-to-g",
+        title: "D ↔ G transition",
+        description:
+          "Start here. D and G share anchor points and live next to each other in countless beginner songs. The most forgiving switch you can practice.",
+        videoUrl: `${R2}/Chord%20Switching%20Practice%20-%20G%20to%20D%20%20Easy%20Beginner%20Guitar%20Lessons%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
+      },
+      {
+        slug: "g-to-c",
+        title: "G ↔ C transition",
+        description:
+          "Step up. There's a shared note on the second string — once you find that anchor, this gets fast.",
         videoUrl: `${R2}/Chord%20Switching%20Practice%20-%20C%20to%20G%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
       {
         slug: "c-to-d",
         title: "C ↔ D transition",
-        description: "Trickier — your hand has to travel further. Take it slow.",
+        description:
+          "Hardest of the three — your whole hand has to reshape and travel. Slow it down. Speed comes later.",
         videoUrl: `${R2}/Chord%20Switching%20Practice%20-%20C%20to%20D%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
-      },
-      {
-        slug: "g-to-d",
-        title: "G ↔ D transition",
-        description: "The bread-and-butter chord change. Every song you'll play uses this.",
-        videoUrl: `${R2}/Chord%20Switching%20Practice%20-%20G%20to%20D%20%20Easy%20Beginner%20Guitar%20Lessons%20-%20Good%20Guitarist%20%281080p%2C%20h264%2C%20youtube%29.mp4`,
       },
     ],
   },
