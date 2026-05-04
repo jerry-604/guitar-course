@@ -86,6 +86,30 @@ export function Hero() {
           <Stat label="Chords to learn" value="D · G · C" />
           <Stat label="Cost" value="Free, forever" />
         </div>
+
+        {/* Scroll cue */}
+        <div className="absolute bottom-3 left-1/2 hidden -translate-x-1/2 sm:block">
+          <div className="flex flex-col items-center gap-1 text-foreground/45">
+            <span className="caps">Scroll</span>
+            <svg
+              width="16"
+              height="20"
+              viewBox="0 0 16 20"
+              fill="none"
+              className="animate-pulse"
+              aria-hidden
+            >
+              <path
+                d="M8 2 L8 16 M3 11 L8 16 L13 11"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity="0.7"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
   );

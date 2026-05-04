@@ -15,7 +15,7 @@ export function InstructorPitch() {
         </div>
 
         <div className="md:col-span-7 space-y-5 text-base leading-relaxed text-foreground/85 sm:space-y-6 sm:text-lg">
-          <p>
+          <p className="drop-cap">
             Hi. I&apos;m Jerry, a professional bass guitarist. I&apos;ve
             played jazz concerts at Swarthmore and gigs across NYC. Before
             I moved to the US, I tutored bass and piano students one-on-one
@@ -28,7 +28,7 @@ export function InstructorPitch() {
             This is an <em className="text-foreground">accelerated path to
             playing your first country music song</em>. Skip the rabbit
             holes; play <em>The Cowboy Rides Away</em> by week two if you
-            put in 15 minutes a day.
+            put in 30 minutes a day.
           </p>
           <p>
             There are thousands of beginner guitar videos online. Most of
