@@ -81,8 +81,8 @@ export const VideoPlayer = ({ url, poster, chapters }: VideoPlayerProps) => {
       </div>
 
       <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-        Tip · use the ⚙ icon on the player to slow the video down for
-        practicing along, or speed it up for review.
+        Tip · click the menu (three dots ⋮ on the right of the player) →
+        Playback speed → pick 0.5x or 0.75x to play along, or 1.5x for review.
       </p>
 
       {chapters && chapters.length > 0 && (
