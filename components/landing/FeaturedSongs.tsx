@@ -94,6 +94,7 @@ export async function FeaturedSongs() {
                         ? `/learn/${sideA.slug}/${sideA.lessons[0]?.slug ?? ""}`
                         : "/learn"
                     }
+                    submitHref={`/learn/${song.slug}/${song.lessons[0]?.slug ?? ""}`}
                   />
                 ) : (
                   <Link

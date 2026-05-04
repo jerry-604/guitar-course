@@ -35,7 +35,18 @@ const plexMono = IBM_Plex_Mono({
 const SITE_DESCRIPTION =
   "A free, single-instructor curriculum that takes you from your first guitar lesson to playing a complete George Strait song. Three open chords, three transitions, one real song.";
 
+// Resolve the canonical site URL for absolute OG image links and similar.
+// Priority: explicit NEXT_PUBLIC_SITE_URL → Vercel-injected VERCEL_URL →
+// localhost. Without this, social-link previews would fail to find the
+// auto-generated /opengraph-image.png.
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Guitar Course · Beginner to George Strait",
     template: "%s · Guitar Course",
@@ -56,11 +67,16 @@ export const metadata: Metadata = {
     title: "Guitar Course · Beginner to George Strait",
     description: SITE_DESCRIPTION,
     siteName: "Guitar Course",
+    url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
     title: "Guitar Course · Beginner to George Strait",
     description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
