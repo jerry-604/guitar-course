@@ -1,8 +1,12 @@
 /**
- * Tiny Resend client — no SDK, just fetch. Edge-runtime safe. We use
- * Resend's `onboarding@resend.dev` from-address which works without a
- * verified domain as long as the recipient is the Resend account owner
- * (Jerry). For production, add a verified domain and switch the from.
+ * Tiny Resend client — no SDK, just fetch. Edge-runtime safe.
+ *
+ * From-address resolution:
+ * - If RESEND_FROM_EMAIL is set (e.g. "Jerry <hi@thanielguitarlessons.com>"
+ *   on a verified Resend domain), use that — can send to anyone.
+ * - Otherwise fall back to "onboarding@resend.dev" — works without
+ *   domain verification, BUT Resend will only deliver to the email the
+ *   account was created with (free-tier test-mode restriction).
  */
 type EmailParams = {
   to: string | string[];
@@ -10,12 +14,20 @@ type EmailParams = {
   html: string;
 };
 
+const DEFAULT_FROM = "Guitar Course <onboarding@resend.dev>";
+
 export async function sendEmail({ to, subject, html }: EmailParams) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn("[email] RESEND_API_KEY not set — dropping email:", subject);
-    return { ok: false, reason: "no-key" as const };
+    return {
+      ok: false as const,
+      reason: "no-key" as const,
+      message: "Email service not configured (RESEND_API_KEY missing).",
+    };
   }
+
+  const from = process.env.RESEND_FROM_EMAIL ?? DEFAULT_FROM;
 
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -24,7 +36,7 @@ export async function sendEmail({ to, subject, html }: EmailParams) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Guitar Course <onboarding@resend.dev>",
+      from,
       to: Array.isArray(to) ? to : [to],
       subject,
       html,
@@ -32,9 +44,19 @@ export async function sendEmail({ to, subject, html }: EmailParams) {
   });
 
   if (!resp.ok) {
-    const text = await resp.text().catch(() => "");
-    console.error("[email] Resend error", resp.status, text);
-    return { ok: false, reason: "upstream" as const, status: resp.status };
+    const body = await resp.text().catch(() => "");
+    let message = `Resend ${resp.status}`;
+    try {
+      const parsed = JSON.parse(body);
+      if (parsed?.message) message = parsed.message;
+    } catch {}
+    console.error("[email] Resend error", resp.status, body);
+    return {
+      ok: false as const,
+      reason: "upstream" as const,
+      status: resp.status,
+      message,
+    };
   }
 
   return { ok: true as const };

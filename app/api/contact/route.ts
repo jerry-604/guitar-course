@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { sendEmail, buildContactEmail } from "@/lib/email";
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "jeremiahomolewa.work@gmail.com";
+// Where contact-form messages get delivered. Defaults to ADMIN_EMAIL if
+// not set explicitly. Useful when the inbox you grade from (ADMIN_EMAIL,
+// matched against your Clerk login) differs from the inbox Resend can
+// actually deliver to (e.g. while you're still on free-tier "test mode").
+const CONTACT_EMAIL =
+  process.env.CONTACT_EMAIL ??
+  process.env.ADMIN_EMAIL ??
+  "jeremiahomolewa.work@gmail.com";
 
 type Body = {
   name?: string;
@@ -49,7 +56,7 @@ export async function POST(req: NextRequest) {
   }
 
   const result = await sendEmail({
-    to: ADMIN_EMAIL,
+    to: CONTACT_EMAIL,
     ...buildContactEmail({
       fromName,
       fromEmail,
@@ -61,7 +68,12 @@ export async function POST(req: NextRequest) {
 
   if (!result.ok) {
     return NextResponse.json(
-      { error: "Couldn't send the message — try again in a moment" },
+      {
+        error:
+          result.reason === "no-key"
+            ? "Email service not configured. Tell Jerry to set RESEND_API_KEY."
+            : `Couldn't send: ${result.message ?? "unknown error"}`,
+      },
       { status: 502 },
     );
   }

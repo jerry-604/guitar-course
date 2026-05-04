@@ -4,7 +4,11 @@ import { getOrCreateUser } from "@/lib/auth";
 import { sendEmail, buildSubmissionEmail } from "@/lib/email";
 import { getCurriculum } from "@/lib/queries/curriculum";
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "jeremiahomolewa.work@gmail.com";
+// See app/api/contact/route.ts for why this is split from ADMIN_EMAIL.
+const CONTACT_EMAIL =
+  process.env.CONTACT_EMAIL ??
+  process.env.ADMIN_EMAIL ??
+  "jeremiahomolewa.work@gmail.com";
 
 type Body = {
   moduleSlug?: string;
@@ -72,7 +76,7 @@ export async function POST(req: NextRequest) {
     process.env.NEXT_PUBLIC_BASE_URL ?? new URL(req.url).origin;
   const songTitle = mod.songTitle ?? mod.title;
   void sendEmail({
-    to: ADMIN_EMAIL,
+    to: CONTACT_EMAIL,
     ...buildSubmissionEmail({
       studentName: user.name,
       studentEmail: user.email,
