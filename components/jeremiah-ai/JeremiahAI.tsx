@@ -46,7 +46,36 @@ export function JeremiahAI() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const launcherRef = useRef<HTMLButtonElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  // Close on outside click. Skip clicks inside the panel itself, the
+  // launcher button (it has its own toggle), and any open Radix portal
+  // (so the in-chat ContactModal doesn't accidentally dismiss the chat).
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as Element | null;
+      if (!target) return;
+      if (panelRef.current?.contains(target)) return;
+      if (launcherRef.current?.contains(target)) return;
+      if (target.closest('[role="dialog"]')) return;
+      setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
+
+  // Escape closes the chat (matches every other dismissable surface).
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   // Load history on first mount.
   // - Signed in: GET /api/chat/history (Postgres). Cross-device.
@@ -261,6 +290,7 @@ export function JeremiahAI() {
     <>
       {/* Floating launcher */}
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close Jerry AI" : "Open Jerry AI"}
@@ -281,7 +311,12 @@ export function JeremiahAI() {
 
       {/* Chat panel */}
       {open && (
-        <div className="fixed inset-x-3 bottom-24 z-40 flex max-h-[78vh] flex-col border border-foreground/15 bg-card text-foreground shadow-2xl md:inset-auto md:bottom-28 md:right-7 md:h-[600px] md:w-[420px]">
+        <div
+          ref={panelRef}
+          role="dialog"
+          aria-label="Jerry AI assistant"
+          className="fixed inset-x-3 bottom-24 z-40 flex max-h-[78vh] flex-col border border-foreground/15 bg-card text-foreground shadow-2xl md:inset-auto md:bottom-28 md:right-7 md:h-[600px] md:w-[420px]"
+        >
           {/* Header */}
           <div className="border-b border-foreground/15 bg-foreground px-4 py-3 text-background">
             <div className="flex items-baseline justify-between gap-3">
