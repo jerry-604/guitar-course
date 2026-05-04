@@ -12,6 +12,7 @@
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
+    "migrate:videos": "tsx scripts/migrate-videos-to-blob.ts",
     "postinstall": "prisma generate"
   },
   "prisma": {
@@ -46,6 +47,7 @@
     "@types/node": "^20.17.16",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@vercel/blob": "^2.3.3",
     "eslint": "^9.19.0",
     "eslint-config-next": "^15.2.3",
     "postcss": "^8.5.1",

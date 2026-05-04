@@ -14,16 +14,20 @@ export function InstructorPitch() {
 
         <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-foreground/85">
           <p>
-            Hi — I&apos;m Jeremiah. I&apos;m a working bass player.
-            Back in Nigeria, before I moved to the US, I performed at
-            concerts and taught bass and piano to anyone who&apos;d sit
-            still long enough. I picked every video on this site myself.
+            Hi — I&apos;m Jeremiah. I&apos;m a professional bass guitarist.
+            Back in Nigeria, before I moved to the US, I played multiple
+            concerts and tutored bass and piano students one-on-one. So
+            when I say I picked the videos on this site, I mean I sat with
+            every one of them with the eye of somebody who&apos;s actually
+            put a chord under a beginner&apos;s fingers and watched them
+            get it.
           </p>
           <p>
             There are thousands of beginner guitar videos online. Most of
             them assume you already know things you don&apos;t. The ones
-            here are the ones I&apos;d hand a friend — clear, in the right
-            order, no surprise pre-requisites buried halfway through.
+            here are the ones I&apos;d hand a student — clear, in the
+            right order, no surprise prerequisites buried halfway through,
+            nothing that wastes your first hour with a guitar in your hand.
           </p>
           <p>
             Three open chords, three transitions, and a real country song
