@@ -9,20 +9,27 @@ export function InstructorPitch() {
             <br />
             <span className="italic text-primary">Not assembled.</span>
           </h2>
+          <p className="caps mt-6">— Jeremiah</p>
         </div>
 
         <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-foreground/85">
           <p>
-            Every lesson here was watched, vetted, and ordered by someone who
-            taught bass and piano on the side because he loved it. There are
-            thousands of beginner guitar videos online. Most of them assume
-            you already know things you don&apos;t.
+            Hi — I&apos;m Jeremiah. I&apos;m a working bass player.
+            Back in Nigeria, before I moved to the US, I performed at
+            concerts and taught bass and piano to anyone who&apos;d sit
+            still long enough. I picked every video on this site myself.
           </p>
           <p>
-            This is the path I wish someone had handed me — three open chords,
-            three transitions, and a real country song you can actually play.
-            No interruptions, no &ldquo;watch this next&rdquo; algorithm,
-            no ad breaks in the middle of a strumming pattern.
+            There are thousands of beginner guitar videos online. Most of
+            them assume you already know things you don&apos;t. The ones
+            here are the ones I&apos;d hand a friend — clear, in the right
+            order, no surprise pre-requisites buried halfway through.
+          </p>
+          <p>
+            Three open chords, three transitions, and a real country song
+            you can actually play. No interruptions, no &ldquo;watch this
+            next&rdquo; algorithm, no ad breaks in the middle of a
+            strumming pattern.
           </p>
           <p>
             The teachers featured here:
@@ -35,9 +42,12 @@ export function InstructorPitch() {
           </ul>
 
           <div className="border-t border-border/60 pt-6 mt-8 space-y-2">
-            <div className="caps">Get in touch</div>
+            <div className="caps">If you have any questions</div>
             <p className="text-base text-foreground/85">
-              Questions, feedback, or stuck on a chord? Email&nbsp;
+              Ask <strong className="font-display text-primary">Jeremiah AI</strong>
+              {" "}— the floating chat in the bottom-right corner — for instant
+              help during a lesson. For anything that needs a real human reply,
+              email me at{" "}
               <a
                 href="mailto:jeremiahomolewa.work@gmail.com"
                 className="font-display text-primary underline-offset-4 transition-colors hover:underline"

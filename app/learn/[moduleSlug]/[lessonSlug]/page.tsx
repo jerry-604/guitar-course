@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import {
   getCurriculum,
   getLessonByPath,
@@ -7,8 +7,8 @@ import {
   lockedByModuleSlug,
 } from "@/lib/queries/curriculum";
 import { getOrCreateUser } from "@/lib/auth";
-import { toProxiedVideoUrl } from "@/lib/videoUrl";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { LockedSongView } from "@/components/lesson/LockedSongView";
 import { LessonNotes } from "@/components/lesson/LessonNotes";
 import { LessonCompleteButton } from "@/components/lesson/LessonCompleteButton";
 import { NextLessonButton } from "@/components/lesson/NextLessonButton";
@@ -31,10 +31,26 @@ export default async function LessonPage({
 
   const completed = await getCompletedLessonIds(user.id);
 
-  // Hard-block access to lessons inside a locked song module.
+  // Locked song module: render an in-place "this is gated" explanation
+  // instead of silently redirecting away — bouncing the URL was confusing.
   const lockedBy = lockedByModuleSlug(curriculum, moduleSlug, completed);
   if (lockedBy) {
-    redirect(`/learn`);
+    const blockingModule = curriculum.find((m) => m.slug === lockedBy);
+    return (
+      <LockedSongView
+        lockedModule={mod}
+        blockingModule={
+          blockingModule
+            ? {
+                slug: blockingModule.slug,
+                title: blockingModule.title,
+                songTitle: blockingModule.songTitle,
+                firstLessonSlug: blockingModule.lessons[0]?.slug,
+              }
+            : null
+        }
+      />
+    );
   }
 
   const isComplete = completed.has(lesson.id);
@@ -64,10 +80,11 @@ export default async function LessonPage({
         </div>
       </header>
 
-      {/* Video — framed like a print plate. URL pre-rewritten on the server
-          so the client never sees the raw r2.dev hostname. */}
+      {/* Video — framed like a print plate. SmartVideo (inside VideoPlayer)
+          tries direct R2 first and falls back to the /api/video proxy on
+          error or stall, so we never need to pre-rewrite here. */}
       <div className="my-8 border border-foreground/15 bg-foreground/[0.03] p-2">
-        <VideoPlayer url={toProxiedVideoUrl(lesson.youtubeUrl)} />
+        <VideoPlayer url={lesson.youtubeUrl} />
       </div>
 
       {lesson.notesMarkdown && (

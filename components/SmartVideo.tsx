@@ -41,19 +41,26 @@ export function SmartVideo({
   preload = "metadata",
   ariaHidden,
 }: SmartVideoProps) {
-  const directUrl = src.startsWith("http")
-    ? src
-    : `${R2_BASE}/${src.replace(/^\//, "")}`;
-
-  // Build the proxy URL by mirroring the R2 path under /api/video/...
-  const proxyUrl = (() => {
+  // Idempotent: accept full R2 URL, bare R2 path, or already-proxied
+  // /api/video/... path and resolve to canonical (directUrl, proxyUrl).
+  let directUrl: string;
+  let proxyUrl: string;
+  if (src.startsWith("/api/video/")) {
+    proxyUrl = src;
+    directUrl = `${R2_BASE}${src.slice("/api/video".length)}`;
+  } else if (src.startsWith("http")) {
+    directUrl = src;
     try {
-      const u = new URL(directUrl);
-      return `/api/video${u.pathname}`;
+      const u = new URL(src);
+      proxyUrl = `/api/video${u.pathname}`;
     } catch {
-      return directUrl;
+      proxyUrl = src;
     }
-  })();
+  } else {
+    const cleanPath = `/${src.replace(/^\//, "")}`;
+    directUrl = `${R2_BASE}${cleanPath}`;
+    proxyUrl = `/api/video${cleanPath}`;
+  }
 
   const [currentSrc, setCurrentSrc] = useState(directUrl);
   const failedRef = useRef(false);
