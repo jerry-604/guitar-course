@@ -3,25 +3,12 @@ const CDN = "https://videos.thanielguitarlessons.com";
 type Reel = {
   src: string;
   label: string;
-  sublabel: string;
 };
 
 const REELS: Reel[] = [
-  {
-    src: `${CDN}/77k8ho_1.mp4`,
-    label: "Piano",
-    sublabel: "Studio cut",
-  },
-  {
-    src: `${CDN}/6fn5rd_1.mp4`,
-    label: "Piano",
-    sublabel: "Live take",
-  },
-  {
-    src: `${CDN}/rdfq6d_1.mp4`,
-    label: "Guitar",
-    sublabel: "Jazz concert solo",
-  },
+  { src: `${CDN}/77k8ho_1.mp4`, label: "Piano" },
+  { src: `${CDN}/6fn5rd_1.mp4`, label: "Piano" },
+  { src: `${CDN}/rdfq6d_1.mp4`, label: "Guitar · jazz concert solo" },
 ];
 
 /**
@@ -49,9 +36,8 @@ export function SampleReels() {
                 className="aspect-video w-full bg-black"
               />
             </div>
-            <figcaption className="caps flex items-baseline justify-between text-foreground/70">
-              <span className="text-foreground/85">{r.label}</span>
-              <span>{r.sublabel}</span>
+            <figcaption className="caps text-foreground/75">
+              {r.label}
             </figcaption>
           </figure>
         ))}
