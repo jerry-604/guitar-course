@@ -1,4 +1,6 @@
 import { ContactModal } from "@/components/contact/ContactModal";
+import { SampleReels } from "@/components/landing/SampleReels";
+import { DeadliftFunFact } from "@/components/landing/DeadliftFunFact";
 
 export function InstructorPitch() {
   return (
@@ -24,6 +26,9 @@ export function InstructorPitch() {
             somebody who&apos;s actually put a chord under a beginner&apos;s
             fingers and watched them get it.
           </p>
+
+          {/* Three short reels so visitors see + hear Jerry actually play */}
+          <SampleReels />
           <p>
             This is an <em className="text-foreground">accelerated path to
             playing your first country music song</em>. Skip the rabbit
@@ -79,8 +84,8 @@ export function InstructorPitch() {
           <p className="caps pt-4">
             All vetted · downloaded · ad-free
           </p>
+
+          {/* Off-curriculum Easter egg: Jerry also coaches powerlifting */}
+          <DeadliftFunFact />
         </div>
       </div>
-    </section>
-  );
-}
