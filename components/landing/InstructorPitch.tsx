@@ -89,3 +89,6 @@ export function InstructorPitch() {
           <DeadliftFunFact />
         </div>
       </div>
+    </section>
+  );
+}
